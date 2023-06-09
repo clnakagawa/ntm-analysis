@@ -48,12 +48,19 @@ def main(targets):
         print(df.head())
         df = df.set_index('seq1', drop=True).rename_axis(None)
         df.to_csv(f"idTables/{target}_seqid.csv", index=False)
-        hmap = sns.heatmap(df)
-        fig = hmap.get_figure()
-        fig.savefig(f"plots/{target}PIDmap")
+        plt.figure(figsize=(100, 100))
+        ax = sns.heatmap(df,cmap=sns.color_palette('Reds_r', n_colors=200),
+                         square=True,
+                         linewidths=0.5,
+                         annot=True,
+                         fmt='.2f',
+                         annot_kws={"fontsize":8})
+        cbar = ax.collections[0].colorbar
+        cbar.ax.tick_params(labelsize=40)
+        plt.savefig(f"plots/{target}PIDmap")
         plt.clf()
 
 
 if __name__ == "__main__":
-    targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf', 'ITS', 'concat']
+    targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf', 'concat']
     main(targets)

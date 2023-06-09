@@ -23,13 +23,16 @@ def distance(s1, s2):
 # make pandas df w snp dists labeled by sp
 # input is plain fasta
 def distMat(fa, target):
+    print(target)
     fas = [f.split("\n") for f in fa.split("\n>")]
     names = [f[0].replace(">",'') for f in fas]
     seqs = [''.join(f[1:]) for f in fas]
     mat = [[distance(s1, s2) for s2 in seqs] for s1 in seqs]
     mat = pd.DataFrame(mat, columns=names)
-    mat.set_index(names)
-    mat.to_csv(f"targetSNPs/{target}SNP", index=False)
+    mat['names'] = names
+    mat = mat.set_index('names', drop=True).rename_axis(None)
+    print(mat.head())
+    mat.to_csv(f"targetSNPs/{target}SNP.csv")
 
 def query(targets, qnames):
     for qname in qnames:
@@ -52,5 +55,8 @@ def main(targets):
         distMat(data, target)
 
 if __name__ == "__main__":
+    # one target for shorter testing time
+    #targets = ['atpD']
+    # all targets for updating
     targets = ['atpD', 'groL', 'rpoB', 'tuf', '16S', '23S', 'concat']
     main(targets)
