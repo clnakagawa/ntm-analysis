@@ -27,7 +27,7 @@ def query(targets, qnames):
             seqs = [''.join(f[1:]) for f in fas]
             mat = [[pid(seqs[qind], s) for s in seqs]]
             df = pd.DataFrame(mat, columns=names)
-            df = df.drop(qname, axis=1)
+            df = df.drop(qnames, axis=1)
             df.to_csv(f"queryData/{qname}/{target}PID.csv", index=False)
 
 def main(targets):

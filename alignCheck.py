@@ -101,7 +101,7 @@ def main(targets):
         seqPlot(seqs, names, target)
         indelPlot(seqs, target)
         gapData(seqs, names, target)
-        gapPlot(seqs,names,target)
+        gapPlot(names,target)
 
 
 

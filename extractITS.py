@@ -24,7 +24,7 @@ def main(makeDB=False):
         if seqs:
             seqs.sort(key=len, reverse=True)
             allseqs += f">{sp}\n{seqs[0]}\n"
-    with open("itsSeqs/allITS.txt", 'w') as f:
+    with open("targetSeqs/ITS_allseqs.txt", 'w') as f:
         f.write(allseqs)
 
 

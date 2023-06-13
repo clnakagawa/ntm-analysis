@@ -34,6 +34,23 @@ def main(targets):
         with open(f"targetSeqs/{id}_allseqs.txt", 'w') as f:
             f.write(allSeqs)
 
+def test(targets, accList):
+    for target, id in targets:
+        ftpList = pd.read_csv("testFiles/summaryData.csv")
+        subPath = os.path.join(os.getcwd(), "testFiles/cdsData")
+        allSeqs = ""
+        for sp in accList:
+            fname = f"{sp}_cds.fna"
+            with open(os.path.join(subPath, fname), 'r') as f:
+                spSeq = getSeq(f.read(), sp, target)
+                if spSeq == "":
+                    print(f"Target not found in {sp}")
+                else:
+                    print(f"{spSeq.count('>')} targets found in {sp}")
+                    allSeqs += spSeq
+        with open(f"query/{id}_all.txt", 'w') as f:
+            f.write(allSeqs)
+
 if __name__ == "__main__":
     targets = [('chaperonin GroEL', 'groL'),
                ('ATP synthase subunit beta', 'atpD'),
