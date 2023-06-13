@@ -4,4 +4,6 @@
 /queryData/
 /queryPlots/
 /querySNP/
-/testFiles/cdsData/
+/genomes/
+/cdsData/
+/rnaData/
