@@ -91,9 +91,9 @@ def main():
               total.loc[realEntry['sp'].values[0]]['snp'],
               total['snp'].values[0])
         resdf.loc[len(resdf.index)] = [acc,
-                                       realEntry['organism_name'],
+                                       realEntry['organism_name'].values[0],
                                        total.index.values[0],
-                                       total.iloc[[0]]['snp'],
+                                       total.loc[realEntry['sp'].values[0]]['snp'],
                                        total['snp'].values[0]]
         if datetime.datetime.now().hour >= 18:
             print("Time's up")
