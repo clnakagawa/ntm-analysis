@@ -20,6 +20,18 @@ def distance(s1, s2):
             diff += 1
     return diff
 
+def distanceList(s1, s2):
+    diffs = []
+    for i in range(len(s1)):
+        cln1 = clean(s1[i])
+        cln2 = clean(s2[i])
+        diff = 0
+        for i in range(len(s1)):
+            if cln1[i] != cln2[i] and cln2 != '-' and cln1 != '-':
+                diff += 1
+        diffs.append(diff)
+    return diffs
+
 # make pandas df w snp dists labeled by sp
 # input is plain fasta
 def distMat(fa, target):
