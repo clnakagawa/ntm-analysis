@@ -42,12 +42,20 @@ def main():
     # df.to_csv("testFiles/hasTargetList.csv")
 
     df = pd.read_csv('testFiles/hasTargetList.csv')
-    accList = list(df['accs'])
+    try:
+        with open("query/toTest.txt", 'r') as f:
+            accList = f.read().split("\n")
+    except:
+        accList = list(df['accs'])
 
-    # get random sample
-    toGet = accList[0]
-    resdf = pd.DataFrame(columns=['acc', 'name', 'id', 'realDist', 'idDist'])
-    for acc in accList:
+    try:
+        resdf = pd.read_csv('query/queryResults.csv', index_col=0)
+    except:
+        resdf = pd.DataFrame(columns=['acc', 'name', 'id', 'realDist', 'idDist'])
+
+
+    while accList:
+        acc = accList.pop()
         start = datetime.datetime.now()
         if not os.path.exists(f"query/{acc}"):
             os.mkdir(f"query/{acc}")
@@ -95,11 +103,16 @@ def main():
                                        total.index.values[0],
                                        total.loc[realEntry['sp'].values[0]]['snp'],
                                        total['snp'].values[0]]
-        if datetime.datetime.now().hour >= 18:
+
+        print(f"Time is {datetime.datetime.now()-start}")
+        with open("query/toTest.txt", 'w') as f:
+            f.write('\n'.join(accList))
+        resdf.to_csv("query/queryResults.csv")
+
+        if datetime.datetime.now().hour >= 16:
             print("Time's up")
             break
-        print(f"Time is {datetime.datetime.now()-start}")
-    resdf.to_csv("query/queryResults.csv")
+
 
 if __name__ == "__main__":
     main()
