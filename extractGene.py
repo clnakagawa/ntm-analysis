@@ -17,10 +17,17 @@ def getSeq(cds, sp, target):
     return seq
 
 
-def main(targets):
+def main(targets, file=None, dir=""):
+    if dir != "":
+        dir = dir+"/"
+    if not os.path.exists(f"{dir}targetSeqs"):
+        os.makedirs(f"{dir}targetSeqs")
     for target, id in targets:
-        ftpList = pd.read_csv("summaryData.csv")
-        subPath = os.path.join(os.getcwd(), "cdsData")
+        if file == None:
+            ftpList = pd.read_csv("summaryData.csv")
+        else:
+            ftpList = pd.read_csv(file)
+        subPath = os.path.join(os.getcwd(), f"{dir}cdsData")
         allSeqs = ""
         for sp in ftpList['sp']:
             fname = f"{sp}_cds.fna"
@@ -31,7 +38,7 @@ def main(targets):
                 else:
                     print(f"{spSeq.count('>')} targets found in {sp}")
                     allSeqs += spSeq
-        with open(f"targetSeqs/{id}_allseqs.txt", 'w') as f:
+        with open(f"{dir}targetSeqs/{id}_allseqs.txt", 'w') as f:
             f.write(allSeqs)
 
 def test(targets, acc):

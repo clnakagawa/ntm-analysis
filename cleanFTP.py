@@ -11,6 +11,7 @@ def keyF(val):
 
 
 def getSp(x):
+    x.replace("[|]","")
     strs = x.split(" ")
     splits = ['subsp.', 'variant']
     if len(strs) > 2 and strs[2] in splits:

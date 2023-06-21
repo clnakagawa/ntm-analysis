@@ -2,18 +2,17 @@ import pandas as pd
 import numpy as np
 import cleanFTP, getGenes, getRNA, getGenomes, extractRNA, extractGene, extractITS, seqClean, os
 
-def main():
+def main(file=None):
     #clean ftp table
     print("finding relevant entries...")
-    cleanFTP.main()
+    if file is None:
+        cleanFTP.main()
 
     #get cds, genomes, rna
-    print("retrieving cds files...")
+    print("retrieving files...")
+    getGenes.main(type="cds")
+    getGenes.main(type="rna")
     getGenes.main()
-    print("retrieving rna files...")
-    getRNA.main()
-    print("retrieving genome files...")
-    getGenomes.main()
 
     # define targets
     gene_targets = [('chaperonin GroEL', 'groL'),
@@ -35,8 +34,6 @@ def main():
     seqClean.main(targets)
     print("data ready for alignment")
     print("launching alignment")
-    os.chdir("C:\\Users\cyn06\OneDrive - New York State Office of Information Technology Services\Downloads\mafft-7.520-win64-signed\mafft-win")
-    os.startfile('allAlign.bat')
 
 if __name__ == "__main__":
     main()

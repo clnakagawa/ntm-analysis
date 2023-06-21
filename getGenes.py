@@ -9,15 +9,19 @@ import pandas as pd
 
 
 
-def getFile(url, spName, test=False):
+def getFile(url, spName, out=None, type=None):
+    if type is not None:
+        suf = type+"_from_"
+    else:
+        suf = ""
     ftpPath = url
     acc = ftpPath.split('/')[-1]
-    ftpPath = ftpPath + "/" + acc + "_cds_from_genomic.fna.gz"
-    if test:
-        subPath = os.path.join(os.getcwd(), "testFiles/cdsData")
-    else:
+    ftpPath = ftpPath + "/" + acc + f"_{suf}genomic.fna.gz"
+    if out is None:
         subPath = os.path.join(os.getcwd(), "cdsData")
-    filePath = os.path.join(subPath, f"{acc}_cds_from_genomic.fna.gz")
+    else:
+        subPath = os.path.join(os.getcwd(), f"{out}/{type}Data")
+    filePath = os.path.join(subPath, f"{acc}_{suf}genomic.fna.gz")
     with open(filePath, 'wb') as f:
         for i in range(10):
             try:
@@ -30,21 +34,26 @@ def getFile(url, spName, test=False):
     with gzip.open(filePath, 'rb') as f:
         content = f.read()
     os.remove(filePath)
-    with open(os.path.join(subPath, f"{spName}_cds.fna"), 'wb') as f:
+    with open(os.path.join(subPath, f"{spName}_{type}.fna"), 'wb') as f:
         f.write(content)
-    print(f"File {spName}_cds.fna written")
+    print(f"File {spName}_{type}.fna written")
 
-def main():
-    ftpData = pd.read_csv("summaryData.csv")
+def main(file=None, output=None, type=None):
+    if not os.path.exists(f"{output}/{type}Data"):
+        os.makedirs(f"{output}/{type}Data")
+    if file is None:
+        ftpData = pd.read_csv("summaryData.csv")
+    else:
+        ftpData = pd.read_csv(file)
     pd.set_option('display.max_columns', 10)
     print(ftpData.head(5))
-    ftpData.apply(lambda x: getFile(x['ftp_path'], x['sp']), axis=1)
+    ftpData.apply(lambda x: getFile(x['ftp_path'], x['sp'], out=output, type=type), axis=1)
 
 def test():
     ftpData = pd.read_csv("testFiles/summaryData.csv")
     pd.set_option('display.max_columns', 10)
     print(ftpData.head(5))
-    ftpData.apply(lambda x: getFile(x['ftp_path'], x['# assembly_accession'], test=True), axis=1)
+    ftpData.apply(lambda x: getFile(x['ftp_path'], x['# assembly_accession'], out="testFiles"), axis=1)
 
 if __name__ == "__main__":
-    main()
+    main(type="cds")
