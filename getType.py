@@ -68,6 +68,8 @@ def main():
                ('RNA polymerase subunit beta', 'rpoB'),
                ('elongation factor Tu', 'tuf')]
     extractGene.main(targets, file="refseqTypes.csv", dir="lbsnFiles")
+    rnaTargets = [('16S','16S'),('23S','23S')]
+    extractGene.main(rnaTargets, file="refseqTypes.csv", dir="lbsnFiles", type='rna')
 
 
 

@@ -17,7 +17,7 @@ def getSeq(cds, sp, target):
     return seq
 
 
-def main(targets, file=None, dir=""):
+def main(targets, file=None, dir="", type="cds"):
     if dir != "":
         dir = dir+"/"
     if not os.path.exists(f"{dir}targetSeqs"):
@@ -27,10 +27,10 @@ def main(targets, file=None, dir=""):
             ftpList = pd.read_csv("summaryData.csv")
         else:
             ftpList = pd.read_csv(file)
-        subPath = os.path.join(os.getcwd(), f"{dir}cdsData")
+        subPath = os.path.join(os.getcwd(), f"{dir}{type}Data")
         allSeqs = ""
         for sp in ftpList['sp']:
-            fname = f"{sp}_cds.fna"
+            fname = f"{sp}_{type}.fna"
             with open(os.path.join(subPath, fname), 'r') as f:
                 spSeq = getSeq(f.read(), sp, target)
                 if spSeq == "":

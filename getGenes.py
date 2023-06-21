@@ -9,8 +9,8 @@ import pandas as pd
 
 
 
-def getFile(url, spName, out=None, type=None):
-    if type is not None:
+def getFile(url, spName, out=None, type="genome"):
+    if type is not "genome":
         suf = type+"_from_"
     else:
         suf = ""
@@ -39,6 +39,8 @@ def getFile(url, spName, out=None, type=None):
     print(f"File {spName}_{type}.fna written")
 
 def main(file=None, output=None, type=None):
+    if type is None:
+        type = "genome"
     if not os.path.exists(f"{output}/{type}Data"):
         os.makedirs(f"{output}/{type}Data")
     if file is None:
