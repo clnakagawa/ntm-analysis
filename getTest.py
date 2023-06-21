@@ -5,6 +5,20 @@ import extractGene
 import extractRNA
 from functools import reduce
 
+
+def ctgaps(seq):
+    ct = 0
+    current = False
+    for c in seq:
+        if c == '-':
+            if not current:
+                ct += 1
+                current = True
+        else:
+            if current:
+                current = False
+    return ct
+
 def main():
     pd.set_option('display.max_columns', 15)
     # cleanFTP.test()
@@ -16,7 +30,7 @@ def main():
     # get accession numbers
     # OLD CODE from getting the list of ones w targets
     sumData = pd.read_csv("testFiles/summaryData.csv")
-    # accnums = df['# assembly_accession']
+    # accnums = sumData['# assembly_accession']
     # geneNames = ['ATP synthase subunit beta', 'chaperonin GroEL', 'RNA polymerase subunit beta', 'elongation factor Tu']
     # rnaNames = ['16S', '23S']
     #
@@ -67,18 +81,7 @@ def main():
     except:
         errordf = pd.DataFrame(columns=['actual', 'result', 'frequency'])
 
-    def ctgaps(seq):
-        ct = 0
-        current = False
-        for c in seq:
-            if c == '-':
-                if not current:
-                    ct += 1
-                    current = True
-            else:
-                if current:
-                    current = False
-        return ct
+
 
     while accList:
         acc = accList.pop()

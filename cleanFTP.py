@@ -34,10 +34,10 @@ def main():
     data = data.loc[data['organism_name'].str.startswith(("Mycobacterium","Mycobacteroides","Mycolicibacter","Mycolicibacillus","Mycolicibacterium"))]
     data['sp'] = data['organism_name'].apply(getSp)
     print(data.head())
-    data['aKey'] = data['assembly_level'].apply(keyF)
+    data = data.loc[data['assembly_level'] == 'Complete Genome']
     data['oKey'] = data['organism_name'].apply(lambda x: 1-('subsp' in x))
     print(data.head())
-    data = data.sort_values(by=['aKey', 'oKey'])
+    data = data.sort_values(by=['oKey'])
     data = data.loc[data['organism_name'].str.contains("phage|Phage| sp. ") == False]
     data = data.loc[data['organism_name'].str.contains(tbIDs) == False]
     data = data.drop_duplicates(['sp'], keep="first")
@@ -46,7 +46,7 @@ def main():
 
 # pull sequences for testing
 def test():
-    pd.set_option('display.max_columns', 10)
+    pd.set_option('display.max_columns', 15)
     pd.set_option('display.max_rows', 10)
     assemblies = pd.read_table("assembly_summary_refseq.txt", low_memory=False, skiprows=1)
     data = assemblies[['# assembly_accession',
@@ -58,11 +58,16 @@ def test():
                        "genome_rep",
                        "ftp_path"]]
 
+    data = data.loc[data['genome_rep'] == "Full"]
     data = data.loc[data['organism_name'].str.startswith(("Mycobacterium","Mycobacteroides","Mycolicibacter","Mycolicibacillus","Mycolicibacterium"))]
+    data['sp'] = data['organism_name'].apply(getSp)
+    print(data.head())
+    data = data.loc[data['assembly_level'] == 'Complete Genome']
+    data['oKey'] = data['organism_name'].apply(lambda x: 1-('subsp' in x))
+    print(data.head())
+    data = data.sort_values(by=['oKey'])
     data = data.loc[data['organism_name'].str.contains("phage|Phage| sp. ") == False]
     data = data.loc[data['organism_name'].str.contains(tbIDs) == False]
-    data['sp'] = data['organism_name'].apply(getSp)
-    data['testID'] = [f'ntm{i}' for i in range(len(data.index))]
     data.to_csv("testFiles/summaryData.csv")
     print(f"# genomes: {len(data.index)}")
 
