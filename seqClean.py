@@ -76,7 +76,7 @@ def main(targets, test=False):
         plt.savefig(f"plots/{pltname}")
 
         seqData['fa'] = seqData.apply(lambda x: ">" + x['sp'] + "\n" + x['seq'], axis=1)
-        with open(f"query/{target}.txt", 'w') as f:
+        with open(f"cleanedSeqs/{target}.txt", 'w') as f:
             f.write('\n'.join(seqData['fa']))
 
 if __name__ == "__main__":

@@ -108,7 +108,7 @@ def main():
         for target in targets:
             with open(f"query/{acc}/{target}.txt") as f:
                 qseq = ''.join(f.read().split("\n")[1:])
-            with open(f"cleanedSeqs/new{target}_allseqs.txt", 'r') as f:
+            with open(f"cleanedSeqs/{target}.txt", 'r') as f:
                 refs = f.read().split("\n>")
             seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
             sps = [seq.split("\n")[0].replace(">","") for seq in refs]

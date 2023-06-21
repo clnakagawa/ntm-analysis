@@ -10,7 +10,7 @@ import pandas as pd
 
 
 def getFile(url, spName, out=None, type="genome"):
-    if type is not "genome":
+    if type != "genome":
         suf = type+"_from_"
     else:
         suf = ""
