@@ -7,4 +7,9 @@
 /genomes/
 /cdsData/
 /rnaData/
-/lbsnFiles/
+/lpsnFiles/
+/refFiles/
+/refFiles/cdsData/
+/refFiles/genomeData/
+/refFiles/rnaData/
+/refFiles/targetSeqs/
