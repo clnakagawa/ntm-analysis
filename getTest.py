@@ -229,7 +229,6 @@ def main(source="refFiles", redo=False):
                                            int(sp == total.index.values[0]),
                                            realDist,
                                            1]
-        print(sumdf.head())
 
         # update general summary df
         current = sumgendf.loc[sumgendf['sp'] == sp]
@@ -237,23 +236,22 @@ def main(source="refFiles", redo=False):
             avg = current['accuracy'].values[0]
             ct = current['frequency'].values[0]
             dist = current['avgDist'].values[0]
+            hits = current['top_hits'].values[0]
             sumgendf.loc[sumgendf['sp'] == sp] = [sp,
                                                (avg*ct+int(sp in total[total['snp'] < 10].index.values))/(ct+1),
                                                (dist*ct+realDist)/(ct+1),
                                                ct+1,
-                                               ';'.join(total[total['snp'] < 10].index.values)]
+                                               ';'.join(list(set(list(total[total['snp'] < 10].index.values) + hits.split(";"))))]
         else:
             sumgendf.loc[len(sumgendf.index)] = [sp,
                                                  int(sp in total[total['snp'] < 10].index.values),
                                                  realDist,
                                                  1,
                                                  ';'.join(total[total['snp'] < 10].index.values)]
-        print(sumgendf.head())
 
         # update error df
         errordf.loc[len(errordf.index)] = [sp, total.index.values[0], 1]
         errordf = errordf.groupby(['actual', 'result'])['frequency'].sum().reset_index()
-        print(errordf.head())
         print(f"Time is {datetime.datetime.now()-start}")
         with open(f"query/toTest{source}.txt", 'w') as f:
             f.write('\n'.join(accList))
