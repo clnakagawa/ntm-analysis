@@ -1,4 +1,5 @@
 ,# assembly_accession,taxid,species_taxid,organism_name,infraspecific_name,assembly_level,genome_rep,ftp_path,sp,oKey
+130,GCF_000007865.1,262316,1764,Mycobacterium avium subsp. paratuberculosis K-10,strain=K-10,Complete Genome,Full,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/007/865/GCF_000007865.1_ASM786v1,Mycobacterium_paratuberculosis,0
 187618,GCF_017189355.1,1185650,36809,Mycobacteroides abscessus subsp. abscessus,strain=GD59,Complete Genome,Full,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/189/355/GCF_017189355.1_ASM1718935v1,Mycobacteroides_abscessus,0
 187617,GCF_017183975.1,1962118,36809,Mycobacteroides abscessus subsp. massiliense,strain=GD68B,Complete Genome,Full,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/183/975/GCF_017183975.1_ASM1718397v1,Mycobacteroides_massiliense,0
 187614,GCF_017183915.1,319705,36809,Mycobacteroides abscessus subsp. bolletii,strain=GD91,Complete Genome,Full,https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/017/183/915/GCF_017183915.1_ASM1718391v1,Mycobacteroides_bolletii,0

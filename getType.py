@@ -47,6 +47,12 @@ def main():
            & (refseqs['organism_name'].str.contains(row['spName'].split(' ')[-1]))].values for ind, row in typeStrains.iterrows()]
     idx = [item for sublist in idx for item in sublist]
     refTypes = pd.DataFrame(idx, columns=refseqs.columns)
+
+    # add missing strains
+    toAdd = [" leprae", " lepromatosis", " sinensis", " liflandii", " heraklionensis", " farcinogenes", " spongiae", " basiliense", " ostraviense", " virginiensis", " novum", " hominissuis", " shinshuense", " paratuberculosis"]
+    nonTypes = refseqs.loc[refseqs['organism_name'].str.contains('|'.join(toAdd))]
+    refTypes = pd.concat([refTypes, nonTypes])
+
     refTypes = refTypes.loc[~refTypes['organism_name'].str.contains('|'.join(tbNames))]
     refTypes['assembly_level'] = pd.Categorical(refTypes['assembly_level'], ['Complete Genome', 'Chromosome', 'Contig', 'Scaffold'])
     refTypes = refTypes.sort_values('assembly_level')

@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-tbIDs = "tuberculosis|canettii|mungi|orygis"
+tbIDs = " tuberculosis| canettii| mungi| orygis"
 
 def keyF(val):
     avals = ['Complete Genome', 'Chromosome']

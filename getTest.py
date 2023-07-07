@@ -68,7 +68,7 @@ def ctgaps(seq):
                 current = False
     return ct
 
-def main(source="refFiles"):
+def main(source="refFiles", redo=False):
     pd.set_option('display.max_columns', 15)
     pd.set_option('display.max_rows', 400)
     # cleanFTP.test()
@@ -126,60 +126,70 @@ def main(source="refFiles"):
         sumdf = pd.read_csv(f'query/querySummary{source}.csv', index_col=0)
     except:
         sumdf = pd.DataFrame(columns=['sp','accuracy','avgDist','frequency'])
+
+    try:
+        sumgendf = pd.read_csv(f'query/querySummaryGen{source}.csv', index_col=0)
+    except:
+        sumgendf = pd.DataFrame(columns=['sp','accuracy','avgDist','frequency','top_hits'])
+
     try:
         errordf = pd.read_csv(f'query/queryErrors{source}.csv', index_col=0)
     except:
         errordf = pd.DataFrame(columns=['actual', 'result', 'frequency'])
 
 
-
     while accList:
         acc = accList.pop()
         start = datetime.datetime.now()
-        if not os.path.exists(f"query/{acc}"):
-            os.mkdir(f"query/{acc}")
-        # pull sequences and send to query
-        genetargets = [('chaperonin GroEL', 'groL'),
-                   ('ATP synthase subunit beta', 'atpD'),
-                   ('RNA polymerase subunit beta', 'rpoB'),
-                   ('elongation factor Tu', 'tuf')]
-        targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf']
+        if os.path.exists(f"query/{acc}/totalSNP{source}.csv"):
+            total = pd.read_csv(f"query/{acc}/totalSNP{source}.csv", index_col=0)
+        else:
+            if not os.path.exists(f"query/{acc}"):
+                os.mkdir(f"query/{acc}")
+            # pull sequences and send to query
+            genetargets = [('chaperonin GroEL', 'groL'),
+                       ('ATP synthase subunit beta', 'atpD'),
+                       ('RNA polymerase subunit beta', 'rpoB'),
+                       ('elongation factor Tu', 'tuf')]
+            targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf']
 
-        extractGene.test(genetargets, acc)
-        rnatargets = [('16S', '16S'), ('23S', '23S')]
-        extractGene.test(rnatargets, acc, type='rna')
-        seqClean.test(targets, acc)
-        dfs = []
-        aligner = Align.PairwiseAligner()
-        aligner.open_gap_score = -5
-        aligner.extend_gap_score = -2
-        print(aligner.mismatch_score)
+            extractGene.test(genetargets, acc)
+            rnatargets = [('16S', '16S'), ('23S', '23S')]
+            extractGene.test(rnatargets, acc, type='rna')
+            seqClean.test(targets, acc)
+            dfs = []
+            aligner = Align.PairwiseAligner()
+            aligner.open_gap_score = -5
+            aligner.extend_gap_score = -2
+            aligner.mismatch_score = -2
 
-        for target in targets:
-            with open(f"query/{acc}/{target}.txt") as f:
-                qseq = ''.join(f.read().split("\n")[1:])
-            with open(f"{source}/cleanedSeqs/{target}.txt", 'r') as f:
-                refs = f.read().split("\n>")
-            seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
-            sps = [seq.split("\n")[0].replace(">","") for seq in refs]
-            alns = [aligner.align(qseq, seq)[0] for seq in seqs]
-            snps = snpDists.distanceList([aln[0] for aln in alns],
-                                         [aln[1] for aln in alns])
-            gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
-            df = pd.DataFrame({'sp':sps,'snp':snps,'gap':gaps}).sort_values('snp')
-            df = df.set_index(['sp'])
-            df.to_csv(f"query/{acc}/{target}SNP{source}.csv")
-            dfs.append(df)
-        total = reduce(lambda x, y: x.add(y), dfs)
-        total = total.sort_values('gap')
-        total = total.sort_values('snp')
-        total.to_csv(f"query/{acc}/totalSNP{source}.csv")
+            for target in targets:
+                with open(f"query/{acc}/{target}.txt") as f:
+                    qseq = ''.join(f.read().split("\n")[1:])
+                with open(f"{source}/cleanedSeqs/{target}.txt", 'r') as f:
+                    refs = f.read().split("\n>")
+                seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
+                sps = [seq.split("\n")[0].replace(">","") for seq in refs]
+                alns = [aligner.align(qseq, seq)[0] for seq in seqs]
+                snps = snpDists.distanceList([aln[0] for aln in alns],
+                                             [aln[1] for aln in alns])
+                gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
+                df = pd.DataFrame({'sp':sps,'snp':snps,'gap':gaps}).sort_values('snp')
+                df = df.set_index(['sp'])
+                df.to_csv(f"query/{acc}/{target}SNP{source}.csv")
+                dfs.append(df)
+            total = reduce(lambda x, y: x.add(y), dfs)
+            total = total.sort_values('gap')
+            total = total.sort_values('snp')
+            total.to_csv(f"query/{acc}/totalSNP{source}.csv")
+
         print(total.head())
         realEntry = sumData.loc[sumData['# assembly_accession'] == acc]
         realSp = realEntry['sp'].values[0]
+        print(realSp)
 
         # handle case where real species isn't included
-        if realSp not in total.index:
+        if realSp not in total.index.values:
             print("actual species not on file")
             realDist = 0
             realGap = 0
@@ -221,6 +231,25 @@ def main(source="refFiles"):
                                            1]
         print(sumdf.head())
 
+        # update general summary df
+        current = sumgendf.loc[sumgendf['sp'] == sp]
+        if not current.empty:
+            avg = current['accuracy'].values[0]
+            ct = current['frequency'].values[0]
+            dist = current['avgDist'].values[0]
+            sumgendf.loc[sumgendf['sp'] == sp] = [sp,
+                                               (avg*ct+int(sp in total[total['snp'] < 10].index.values))/(ct+1),
+                                               (dist*ct+realDist)/(ct+1),
+                                               ct+1,
+                                               ';'.join(total[total['snp'] < 10].index.values)]
+        else:
+            sumgendf.loc[len(sumgendf.index)] = [sp,
+                                                 int(sp in total[total['snp'] < 10].index.values),
+                                                 realDist,
+                                                 1,
+                                                 ';'.join(total[total['snp'] < 10].index.values)]
+        print(sumgendf.head())
+
         # update error df
         errordf.loc[len(errordf.index)] = [sp, total.index.values[0], 1]
         errordf = errordf.groupby(['actual', 'result'])['frequency'].sum().reset_index()
@@ -232,6 +261,8 @@ def main(source="refFiles"):
         resdf.to_csv(f"query/queryResults{source}.csv")
         # update summary csv
         sumdf.to_csv(f'query/querySummary{source}.csv')
+        # update summary csv
+        sumgendf.to_csv(f'query/querySummaryGen{source}.csv')
         # update error csv
         errordf.to_csv(f'query/queryErrors{source}.csv')
         if datetime.datetime.now().hour >= 16:
@@ -240,5 +271,5 @@ def main(source="refFiles"):
 
 
 if __name__ == "__main__":
-    main()
-    main(source="lpsnFiles")
+    main(redo=True)
+    main(source="lpsnFiles", redo=True)
