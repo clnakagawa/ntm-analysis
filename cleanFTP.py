@@ -3,6 +3,11 @@ import pandas as pd
 
 tbIDs = " tuberculosis| canettii| mungi| orygis"
 
+def shinyTest():
+    testTable = pd.read_csv("query/GCF_001677095.1/totalSNPrefFiles.csv")
+    testTable.loc[testTable['snp'] < 10].to_csv("testforShiny.csv")
+    return "Hello from python"
+
 def keyF(val):
     avals = ['Complete Genome', 'Chromosome']
     if val in avals:
@@ -74,4 +79,5 @@ def test():
     print(f"# genomes: {len(data.index)}")
 
 if __name__ == "__main__":
-    main()
+    pass
+    # main()

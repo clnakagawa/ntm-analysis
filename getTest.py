@@ -1,56 +1,96 @@
 import pandas as pd
+import numpy as np
 from Bio import Align
+import matplotlib.pyplot as plt
 import cleanFTP, getGenes, random, seqClean, os, snpDists, datetime, re
 import extractGene
 from functools import reduce
 
+def makeGraphs(sample, source="refFiles"):
+    targets = ['16S','23S','atpD','groL','rpoB','tuf']
+    res = pd.read_csv(f"query/{sample}/topHits{source}.csv", index_col=0)
+    sps = res.index.values
+    cov = []
+    for sp in sps:
+        s1 = ""
+        s2 = ""
+        for target in targets:
+            with open(f"query/{sample}/{target}/align{target}_{sp}",'r') as f:
+                seqs = [''.join(seq.split("\n")[1:]) for seq in f.read().split("\n>")]
+                s1 += seqs[0]
+                s2 += seqs[1]
+        cov.append(getCov(s1, s2))
+
+    if not os.path.exists(f"query/{sample}/plots"):
+        os.mkdir(f"query/{sample}/plots")
+
+    fig = plt.figure()
+    plt.bar(sps, cov)
+    plt.bar(sps, res['snp'])
+    plt.savefig(f"query/{sample}/plots/cov.png")
+    plt.close()
+
+
+
+def getCov(seq1, seq2):
+    ct = 0
+    for i in range(len(seq1)):
+        if seq1[i] != '-' and seq2[i] != '-':
+            ct += 1
+    return ct/(len(seq1)-seq1.count("-"))
+
+
 def test(sample, source="refFiles"):
-    start = datetime.datetime.now()
     targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf']
-    if not os.path.exists(f"query/{sample}"):
-        os.mkdir(f"query/{sample}")
-        # pull sequences and send to query
-        genetargets = [('chaperonin GroEL', 'groL'),
-                   ('ATP synthase subunit beta', 'atpD'),
-                   ('RNA polymerase subunit beta', 'rpoB'),
-                   ('elongation factor Tu', 'tuf')]
-
-
-        extractGene.test(genetargets, sample)
-        rnatargets = [('16S', '16S'), ('23S', '23S')]
-        extractGene.test(rnatargets, sample, type='rna')
-        seqClean.test(targets, sample)
-    dfs = []
-    aligner = Align.PairwiseAligner()
-    aligner.open_gap_score = -5
-    aligner.extend_gap_score = -2
-
-    for target in targets:
-        with open(f"query/{sample}/{target}.txt") as f:
-            qseq = ''.join(f.read().split("\n")[1:])
-        with open(f"{source}/cleanedSeqs/{target}.txt", 'r') as f:
-            refs = f.read().split("\n>")
-        seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
-        sps = [seq.split("\n")[0].replace(">", "") for seq in refs]
-        alns = [aligner.align(qseq, seq)[0] for seq in seqs]
-
-        snps = snpDists.distanceList([aln[0] for aln in alns],
-                                     [aln[1] for aln in alns])
-        gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
-        df = pd.DataFrame({'sp': sps, 'snp': snps, 'gap': gaps}).sort_values('snp')
-        df = df.set_index(['sp'])
-        df.to_csv(f"query/{sample}/{target}SNP{source}.csv")
-        dfs.append(df)
-    total = reduce(lambda x, y: x.add(y), dfs)
-    total = total.sort_values('gap')
-    total = total.sort_values('snp')
-    total.to_csv(f"query/{sample}/totalSNP{source}.csv")
+    start = datetime.datetime.now()
+    if os.path.exists(f"query/{sample}/totalSNP{source}.csv"):
+        total = pd.read_csv(f"query/{sample}/totalSNP{source}.csv", index_col=0)
+    else:
+        if not os.path.exists(f"query/{sample}"):
+            os.mkdir(f"query/{sample}")
+        dfs = []
+        aligner = Align.PairwiseAligner()
+        aligner.open_gap_score = -5
+        aligner.extend_gap_score = -2
+        with open(f"query/{sample}/allSeqs.txt", 'r') as f:
+            fseqs = f.read().split("\n>")
+            qseqs = [''.join(seq.split("\n")[1:]) for seq in fseqs]
+        with open(f"query/{sample}/log.txt", 'w') as f:
+            f.write("")
+        for target in targets:
+            if not os.path.exists(f"query/{sample}/{target}"):
+                os.mkdir(f"query/{sample}/{target}")
+            qseq = qseqs[targets.index(target)]
+            with open(f"query/{sample}/log.txt", 'a') as f:
+                f.write("\n" + fseqs[targets.index(target)] + "\nFullseqs\n" + qseqs[targets.index(target)])
+            with open(f"{source}/cleanedSeqs/{target}.txt", 'r') as f:
+                refs = f.read().split("\n>")
+            seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
+            sps = [seq.split("\n")[0].replace(">", "") for seq in refs]
+            alns = [aligner.align(qseq, seq)[0] for seq in seqs]
+            for i in range(len(alns)):
+                with open(f"query/{sample}/{target}/align{target}_{sps[i]}", 'w') as f:
+                    f.write(alns[i].format('fasta'))
+            snps = snpDists.distanceList([aln[0] for aln in alns],
+                                         [aln[1] for aln in alns])
+            gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
+            cov = [getCov(aln[0],aln[1]) for aln in alns]
+            df = pd.DataFrame({'sp': sps, 'snp': snps, 'gap': gaps, 'cov': cov}).sort_values('snp')
+            df = df.set_index(['sp'])
+            df.to_csv(f"query/{sample}/{target}SNP{source}.csv")
+            dfs.append(df)
+        total = reduce(lambda x, y: x.add(y), dfs)
+        total = total.sort_values('gap')
+        total = total.sort_values('snp')
+        total.to_csv(f"query/{sample}/totalSNP{source}.csv")
     print(total.head())
     print(sample,
           total.index.values[0],
           total['snp'].values[0],
-          total['gap'].values[0]
+          total['gap'].values[0],
+          total['cov'].values[0]
           )
+
     print(f"Time is {datetime.datetime.now() - start}")
 
 
@@ -66,6 +106,13 @@ def ctgaps(seq):
         else:
             if current:
                 current = False
+    return ct
+
+def ctmatches(seq1, seq2):
+    ct = 0
+    for i in range(len(seq1)):
+        if seq1[i] != '-' and seq2[i] != '-':
+            ct += 1
     return ct
 
 def main(source="refFiles", redo=False):
@@ -174,7 +221,11 @@ def main(source="refFiles", redo=False):
                 snps = snpDists.distanceList([aln[0] for aln in alns],
                                              [aln[1] for aln in alns])
                 gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
-                df = pd.DataFrame({'sp':sps,'snp':snps,'gap':gaps}).sort_values('snp')
+                matches = [ctmatches(aln[0], aln[1]) for aln in alns]
+                for i in range(len(alns)):
+                    with open(f"query/{acc}/align{target}_{sps[i]}",'w') as f:
+                        f.write(alns[i].format('fasta'))
+                df = pd.DataFrame({'sp':sps,'snp':snps,'gap':gaps,'match':matches}).sort_values('snp')
                 df = df.set_index(['sp'])
                 df.to_csv(f"query/{acc}/{target}SNP{source}.csv")
                 dfs.append(df)
@@ -237,6 +288,9 @@ def main(source="refFiles", redo=False):
             ct = current['frequency'].values[0]
             dist = current['avgDist'].values[0]
             hits = current['top_hits'].values[0]
+            print(hits)
+            if isinstance(hits, float):
+                hits = ""
             sumgendf.loc[sumgendf['sp'] == sp] = [sp,
                                                (avg*ct+int(sp in total[total['snp'] < 10].index.values))/(ct+1),
                                                (dist*ct+realDist)/(ct+1),
@@ -263,11 +317,10 @@ def main(source="refFiles", redo=False):
         sumgendf.to_csv(f'query/querySummaryGen{source}.csv')
         # update error csv
         errordf.to_csv(f'query/queryErrors{source}.csv')
-        if datetime.datetime.now().hour >= 16:
-            print("Time's up")
-            break
 
+def runTest():
+    main()
+    main(source="lpsnFiles")
 
 if __name__ == "__main__":
-    main(redo=True)
-    main(source="lpsnFiles", redo=True)
+    pass
