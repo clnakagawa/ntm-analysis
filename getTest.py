@@ -58,8 +58,8 @@ def test(sample, source="refFiles"):
         with open(f"query/{sample}/log.txt", 'w') as f:
             f.write("")
         for target in targets:
-            if not os.path.exists(f"query/{sample}/{target}"):
-                os.mkdir(f"query/{sample}/{target}")
+            if not os.path.exists(f"query/{sample}/{target}_aligns_{source}"):
+                os.mkdir(f"query/{sample}/{target}_aligns_{source}")
             qseq = qseqs[targets.index(target)]
             with open(f"query/{sample}/log.txt", 'a') as f:
                 f.write("\n" + fseqs[targets.index(target)] + "\nFullseqs\n" + qseqs[targets.index(target)])
@@ -69,7 +69,7 @@ def test(sample, source="refFiles"):
             sps = [seq.split("\n")[0].replace(">", "") for seq in refs]
             alns = [aligner.align(qseq, seq)[0] for seq in seqs]
             for i in range(len(alns)):
-                with open(f"query/{sample}/{target}/align{target}_{sps[i]}", 'w') as f:
+                with open(f"query/{sample}/{target}_align_{source}/{sps[i]}", 'w') as f:
                     f.write(alns[i].format('fasta'))
             snps = snpDists.distanceList([aln[0] for aln in alns],
                                          [aln[1] for aln in alns])
@@ -80,6 +80,7 @@ def test(sample, source="refFiles"):
             df.to_csv(f"query/{sample}/{target}SNP{source}.csv")
             dfs.append(df)
         total = reduce(lambda x, y: x.add(y), dfs)
+        total['cov'] = total['cov'] / 6
         total = total.sort_values('gap')
         total = total.sort_values('snp')
         total.to_csv(f"query/{sample}/totalSNP{source}.csv")
@@ -118,39 +119,42 @@ def ctmatches(seq1, seq2):
 def main(source="refFiles", redo=False):
     pd.set_option('display.max_columns', 15)
     pd.set_option('display.max_rows', 400)
-    # cleanFTP.test()
-    # getGenes.main(file="testFiles/summaryData.csv", output="testFiles", type="cds", acc=True)
-    # getGenes.main(file="testFiles/summaryData.csv", output="testFiles", type="rna", acc=True)
-    # getGenes.main(file="testFiles/summaryData.csv", output="testFiles", acc=True)
-
-    # check if all targets present
-    # get accession numbers
-    # OLD CODE from getting the list of ones w targets
     sumData = pd.read_csv("testFiles/summaryData.csv")
-    # accnums = sumData['# assembly_accession']
-    # geneNames = ['ATP synthase subunit beta', 'chaperonin GroEL', 'RNA polymerase subunit beta', 'elongation factor Tu']
-    # rnaNames = ['16S', '23S']
-    #
-    # for target in geneNames:
-    #     print(target)
-    #     acctemp = []
-    #     for a in accnums:
-    #         with open(f"testFiles/cdsData/{a}_cds.fna", 'r') as f:
-    #             if target in f.read():
-    #                 acctemp.append(a)
-    #     accnums = acctemp
-    # for target in rnaNames:
-    #     print(target)
-    #     acctemp = []
-    #     for a in accnums:
-    #         with open(f"testFiles/rnaData/{a}_rna.fna", 'r') as f:
-    #             if target in f.read():
-    #                 acctemp.append(a)
-    #     accnums = acctemp
-    #
-    # print(len(accnums))
-    # df = pd.DataFrame({'accs':accnums})
-    # df.to_csv("testFiles/hasTargetList.csv")
+
+    if not redo:
+        cleanFTP.test()
+        getGenes.main(file="testFiles/summaryData.csv", output="testFiles", type="cds", acc=True)
+        getGenes.main(file="testFiles/summaryData.csv", output="testFiles", type="rna", acc=True)
+        getGenes.main(file="testFiles/summaryData.csv", output="testFiles", acc=True)
+
+        # check if all targets present
+        # get accession numbers
+        # OLD CODE from getting the list of ones w targets
+
+        accnums = sumData['# assembly_accession']
+        geneNames = ['ATP synthase subunit beta', 'chaperonin GroEL', 'RNA polymerase subunit beta', 'elongation factor Tu']
+        rnaNames = ['16S', '23S']
+
+        for target in geneNames:
+            print(target)
+            acctemp = []
+            for a in accnums:
+                with open(f"testFiles/cdsData/{a}_cds.fna", 'r') as f:
+                    if target in f.read():
+                        acctemp.append(a)
+            accnums = acctemp
+        for target in rnaNames:
+            print(target)
+            acctemp = []
+            for a in accnums:
+                with open(f"testFiles/rnaData/{a}_rna.fna", 'r') as f:
+                    if target in f.read():
+                        acctemp.append(a)
+            accnums = acctemp
+
+        print(len(accnums))
+        df = pd.DataFrame({'accs':accnums})
+        df.to_csv("testFiles/hasTargetList.csv")
 
     df = pd.read_csv('testFiles/hasTargetList.csv')
     try:
@@ -188,7 +192,7 @@ def main(source="refFiles", redo=False):
     while accList:
         acc = accList.pop()
         start = datetime.datetime.now()
-        if os.path.exists(f"query/{acc}/totalSNP{source}.csv"):
+        if os.path.exists(f"query/{acc}/totalSNP{source}.csvx"):
             total = pd.read_csv(f"query/{acc}/totalSNP{source}.csv", index_col=0)
         else:
             if not os.path.exists(f"query/{acc}"):
@@ -211,6 +215,8 @@ def main(source="refFiles", redo=False):
             aligner.mismatch_score = -2
 
             for target in targets:
+                if not os.path.exists(f"query/{acc}/{target}_aligns_{source}"):
+                    os.mkdir(f"query/{acc}/{target}_aligns_{source}")
                 with open(f"query/{acc}/{target}.txt") as f:
                     qseq = ''.join(f.read().split("\n")[1:])
                 with open(f"{source}/cleanedSeqs/{target}.txt", 'r') as f:
@@ -221,15 +227,17 @@ def main(source="refFiles", redo=False):
                 snps = snpDists.distanceList([aln[0] for aln in alns],
                                              [aln[1] for aln in alns])
                 gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
-                matches = [ctmatches(aln[0], aln[1]) for aln in alns]
+
                 for i in range(len(alns)):
-                    with open(f"query/{acc}/align{target}_{sps[i]}",'w') as f:
+                    with open(f"query/{acc}/{target}_aligns_{source}/{sps[i]}",'w') as f:
                         f.write(alns[i].format('fasta'))
-                df = pd.DataFrame({'sp':sps,'snp':snps,'gap':gaps,'match':matches}).sort_values('snp')
+                cov = [getCov(aln[0], aln[1]) for aln in alns]
+                df = pd.DataFrame({'sp': sps, 'snp': snps, 'gap': gaps, 'cov': cov}).sort_values('snp')
                 df = df.set_index(['sp'])
                 df.to_csv(f"query/{acc}/{target}SNP{source}.csv")
                 dfs.append(df)
             total = reduce(lambda x, y: x.add(y), dfs)
+            total['cov'] = total['cov']/6
             total = total.sort_values('gap')
             total = total.sort_values('snp')
             total.to_csv(f"query/{acc}/totalSNP{source}.csv")
@@ -318,9 +326,6 @@ def main(source="refFiles", redo=False):
         # update error csv
         errordf.to_csv(f'query/queryErrors{source}.csv')
 
-def runTest():
-    main()
-    main(source="lpsnFiles")
 
 if __name__ == "__main__":
-    pass
+    main(source="lpsnFiles",redo=True)
