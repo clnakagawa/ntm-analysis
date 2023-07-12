@@ -2,44 +2,44 @@ import pandas as pd
 import numpy as np
 from Bio import Align
 import matplotlib.pyplot as plt
-import cleanFTP, getGenes, random, seqClean, os, snpDists, datetime, re
+import cleanFTP, getGenes, random, seqClean, os, datetime, re
 import extractGene
 from functools import reduce
 
-def makeGraphs(sample, source="refFiles"):
-    targets = ['16S','23S','atpD','groL','rpoB','tuf']
-    res = pd.read_csv(f"query/{sample}/topHits{source}.csv", index_col=0)
-    sps = res.index.values
-    cov = []
-    for sp in sps:
-        s1 = ""
-        s2 = ""
-        for target in targets:
-            with open(f"query/{sample}/{target}/align{target}_{sp}",'r') as f:
-                seqs = [''.join(seq.split("\n")[1:]) for seq in f.read().split("\n>")]
-                s1 += seqs[0]
-                s2 += seqs[1]
-        cov.append(getCov(s1, s2))
+# cleans up sequence if necessary for consistency
+def clean(s):
+    cln = ''
+    for c in s.upper():
+        if c not in ['A', 'T', 'C', 'G']:
+            cln += '-'
+        else:
+            cln += c
+    return cln
 
-    if not os.path.exists(f"query/{sample}/plots"):
-        os.mkdir(f"query/{sample}/plots")
+# gets distances for pairs of aligned sequences
+def distanceList(s1, s2):
+    diffs = []
+    for i in range(len(s1)):
+        cln1 = clean(s1[i])
+        cln2 = clean(s2[i])
+        diff = 0
+        for i in range(len(s1)):
+            if cln1[i] != cln2[i] and cln2[i] != '-' and cln1[i] != '-':
+                diff += 1
+        diffs.append(diff)
+    return diffs
 
-    fig = plt.figure()
-    plt.bar(sps, cov)
-    plt.bar(sps, res['snp'])
-    plt.savefig(f"query/{sample}/plots/cov.png")
-    plt.close()
-
-
-
+# gets coverage of query sequence
+# percent of bases in reference seq matched to base in query
 def getCov(seq1, seq2):
     ct = 0
     for i in range(len(seq1)):
         if seq1[i] != '-' and seq2[i] != '-':
             ct += 1
-    return ct/(len(seq1)-seq1.count("-"))
+    return ct/(len(seq2)-seq2.count("-"))
 
-
+# separate function from main test to be called by dashboard
+# processes 1 sample at a time
 def test(sample, source="refFiles"):
     targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf']
     start = datetime.datetime.now()
@@ -71,7 +71,7 @@ def test(sample, source="refFiles"):
             for i in range(len(alns)):
                 with open(f"query/{sample}/{target}_align_{source}/{sps[i]}", 'w') as f:
                     f.write(alns[i].format('fasta'))
-            snps = snpDists.distanceList([aln[0] for aln in alns],
+            snps = distanceList([aln[0] for aln in alns],
                                          [aln[1] for aln in alns])
             gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
             cov = [getCov(aln[0],aln[1]) for aln in alns]
@@ -95,7 +95,8 @@ def test(sample, source="refFiles"):
     print(f"Time is {datetime.datetime.now() - start}")
 
 
-
+# count the number of gapped regions
+# not number of gap positions
 def ctgaps(seq):
     ct = 0
     current = False
@@ -109,6 +110,7 @@ def ctgaps(seq):
                 current = False
     return ct
 
+# func to find number of bp actually compared
 def ctmatches(seq1, seq2):
     ct = 0
     for i in range(len(seq1)):
@@ -116,6 +118,10 @@ def ctmatches(seq1, seq2):
             ct += 1
     return ct
 
+# runs test using refseq sequences
+# can set source as refFiles or lpsnFiles
+# ref has more complete genomes but lpsn is only type strains
+# set redo True if data already loaded
 def main(source="refFiles", redo=False):
     pd.set_option('display.max_columns', 15)
     pd.set_option('display.max_rows', 400)
@@ -224,7 +230,7 @@ def main(source="refFiles", redo=False):
                 seqs = [''.join(seq.split("\n")[1:]) for seq in refs]
                 sps = [seq.split("\n")[0].replace(">","") for seq in refs]
                 alns = [aligner.align(qseq, seq)[0] for seq in seqs]
-                snps = snpDists.distanceList([aln[0] for aln in alns],
+                snps = distanceList([aln[0] for aln in alns],
                                              [aln[1] for aln in alns])
                 gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
 
