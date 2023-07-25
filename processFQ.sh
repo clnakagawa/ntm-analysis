@@ -1,7 +1,6 @@
 #!/bin/bash
 mkdir $4
 
-export BOWTIE2_INDEXES=~/Users/cln/BTInds
 fastp -i $1 > -o $2/trimmed.fastq
 
 ./minimap2/minimap2 -a "mmInds/$2/$3_16S.mmi" $1 > $4/16Salign.sam
