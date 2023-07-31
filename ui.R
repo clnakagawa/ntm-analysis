@@ -4,7 +4,7 @@ library(reticulate)
 library(dplyr)
 library(DT)
 
-use_python("/home/carter_nakagawa_health_ny_gov/ntm-analysis/myenv/bin/python")
+use_python("myenv/bin/python")
 
 
 # snp distance cutoff for displaying results
@@ -24,12 +24,11 @@ ui <- fluidPage(
                               width=6
                             ),
                             mainPanel(
-                              dataTableOutput('kTable'), 
+                              dataTableOutput('kTable') 
                             )
                           )),
                  
-                 # Running a sample from fasta's for each sequence
-                 # change to run from fastqs?
+                 # Running a sample from fastq for each sequence
                  # input fastq, process fastq to fasta, run fasta
                  tabPanel("Run Sample", 
                           sidebarLayout(
@@ -52,22 +51,55 @@ ui <- fluidPage(
                             ),
                             mainPanel(
                               dataTableOutput('resTable'), 
-                              fluidRow(plotOutput('snpplot', width=500, height=500)),
-                              fluidRow(plotOutput('covplot', width=500, height=500))
+                              fluidRow(
+                                column(6, plotOutput('snpplot', width=500, height=500)),
+                                column(6, plotOutput('covplot', width=500, height=500))
+                              ),
+                              fluidRow(
+                                column(4, plotOutput('cov16S', width=500, height=300)),
+                                column(4, plotOutput('cov23S', width=500, height=300)),
+                                column(4, plotOutput('covatpD', width=500, height=300))
+                              ),
+                              fluidRow(
+                                column(4, plotOutput('covgroL', width=500, height=300)),
+                                column(4, plotOutput('covrpoB', width=500, height=300)),
+                                column(4, plotOutput('covtuf', width=500, height=300))
+                              )
                             ))),
                  
                  # searching past sample results
                  tabPanel("Search Sample", 
                           sidebarLayout(
                             sidebarPanel(
-                              textInput("oldSample", "Browse Results by Sample"),
+                              selectInput(
+                                "oldSample",
+                                "Choose run to view",
+                                dir(path="query"),
+                                selected = NULL,
+                                multiple = FALSE,
+                                selectize = TRUE,
+                                width = NULL,
+                                size = NULL
+                              ),
                               actionButton("browse", "Search"),
                               width=6
                             ),
                             mainPanel(
                               dataTableOutput('table'), 
-                              fluidRow(plotOutput('qsnpplot', width=500, height=500)),
-                              fluidRow(plotOutput('qcovplot', width=500, height=500))
+                              fluidRow(
+                                column(6, plotOutput('qsnpplot', width=500, height=500)),
+                                column(6, plotOutput('qcovplot', width=500, height=500))
+                              ),
+                              fluidRow(
+                                column(4, plotOutput('scov16S')),
+                                column(4, plotOutput('scov23S')),
+                                column(4, plotOutput('scovatpD'))
+                              ),
+                              fluidRow(
+                                column(4, plotOutput('scovgroL')),
+                                column(4, plotOutput('scovrpoB')),
+                                column(4, plotOutput('scovtuf'))
+                              )
                             )))
   )
 )
