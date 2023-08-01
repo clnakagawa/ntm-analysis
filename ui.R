@@ -55,16 +55,7 @@ ui <- fluidPage(
                                 column(6, plotOutput('snpplot', width=500, height=500)),
                                 column(6, plotOutput('covplot', width=500, height=500))
                               ),
-                              fluidRow(
-                                column(4, plotOutput('cov16S', width=500, height=300)),
-                                column(4, plotOutput('cov23S', width=500, height=300)),
-                                column(4, plotOutput('covatpD', width=500, height=300))
-                              ),
-                              fluidRow(
-                                column(4, plotOutput('covgroL', width=500, height=300)),
-                                column(4, plotOutput('covrpoB', width=500, height=300)),
-                                column(4, plotOutput('covtuf', width=500, height=300))
-                              )
+                              uiOutput('qplots')                             
                             ))),
                  
                  # searching past sample results
@@ -90,16 +81,7 @@ ui <- fluidPage(
                                 column(6, plotOutput('qsnpplot', width=500, height=500)),
                                 column(6, plotOutput('qcovplot', width=500, height=500))
                               ),
-                              fluidRow(
-                                column(4, plotOutput('scov16S')),
-                                column(4, plotOutput('scov23S')),
-                                column(4, plotOutput('scovatpD'))
-                              ),
-                              fluidRow(
-                                column(4, plotOutput('scovgroL')),
-                                column(4, plotOutput('scovrpoB')),
-                                column(4, plotOutput('scovtuf'))
-                              )
+                              uiOutput('plots')
                             )))
   )
 )

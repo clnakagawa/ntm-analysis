@@ -102,200 +102,61 @@ server <- function(input, output, session){
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5, size=rel(0.8)))
   })
   output$qcovplot <- renderPlot(qcovplot())
-  
   # coverage plots for targets
-  p16S <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/16Scoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  scovplot16S <- reactive({
-    tab <- p16S()
-    ggplot(p16S()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("16S coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scov16S <- renderPlot(scovplot16S())
+  # change this list to set new targets
+  targets = list("16S", "23S", "atpD", "groL", "rpoB", "tuf")
   
-  q16S <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/16Scoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
+  # for viewing past runs
+  output$plots <- renderUI({
+    plot_output_list <- lapply(targets, function(t) {
+      plotname <- paste(t, "plot", sep="")
+      column(width=3,
+        plotOutput(plotname, height=280, width=250)
+      )
+    })
+    do.call(tagList, plot_output_list)
   })
-  covplot16S <- reactive({
-    tab <- q16S()
-    ggplot(q16S()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("16S coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$cov16S <- renderPlot(covplot16S())
   
-  p23S <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/23Scoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
+  observeEvent(input$browse, {
+    for (t in targets) { 
+      local({
+        target <- t
+        plotname <- paste(target, "plot", sep="")
+        tab <- read.table(paste("fqProcessed/",input$oldSample,"/",target,"coverage.txt", sep=""), header=F)
+        colnames(tab) <- c("sp", "position", "depth")
+        output[[plotname]] <- renderPlot(
+          ggplot(tab) + geom_bar(aes(x=position, y=depth), stat="identity", fill="skyblue") +
+            ggtitle(paste(target, "coverage")) + theme(plot.title=element_text(size=20, face="bold"))
+        )
+      })
+    }    
   })
-  scovplot23S <- reactive({
-    tab <- p23S()
-    ggplot(p23S()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("23S coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scov23S <- renderPlot(scovplot23S())
   
-  q23S <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/23Scoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
+  # for running samples
+  output$qplots <- renderUI({
+    plot_output_list <- lapply(targets, function(t) {
+      plotname <- paste(t, "qplot", sep="")
+      column(width=3,
+        plotOutput(plotname, height=280, width=250)
+      )
+    })
+    do.call(tagList, plot_output_list)
   })
-  covplot23S <- reactive({
-    tab <- q23S()
-    ggplot(q23S()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("23S coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$cov23S <- renderPlot(covplot23S())
-  
-  patpD <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/atpDcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  scovplotatpD <- reactive({
-    tab <- patpD()
-    ggplot(patpD()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("atpD coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scovatpD <- renderPlot(scovplotatpD())
-  
-  qatpD <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/atpDcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  covplotatpD <- reactive({
-    tab <- qatpD()
-    ggplot(qatpD()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("atpD coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$covatpD <- renderPlot(covplotatpD())
-  
-  pgroL <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/groLcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  scovplotgroL <- reactive({
-    tab <- pgroL()
-    ggplot(pgroL()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("groL coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scovgroL <- renderPlot(scovplotgroL())
-  
-  qgroL <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/groLcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  covplotgroL <- reactive({
-    tab <- qgroL()
-    ggplot(qgroL()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("groL coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$covgroL <- renderPlot(covplotgroL())
-  
-  prpoB <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/rpoBcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  scovplotrpoB <- reactive({
-    tab <- prpoB()
-    ggplot(prpoB()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("rpoB coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scovrpoB <- renderPlot(scovplotrpoB())
-  
-  qrpoB <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/rpoBcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  covplotrpoB <- reactive({
-    tab <- qrpoB()
-    ggplot(qrpoB()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("rpoB coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$covrpoB <- renderPlot(covplotrpoB())
-  
-  ptuf <- eventReactive(input$browse, {
-    sname <- input$oldSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/tufcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  scovplottuf <- reactive({
-    tab <- ptuf()
-    ggplot(ptuf()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("tuf coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$scovtuf <- renderPlot(scovplottuf())
-  
-  qtuf <- eventReactive(input$start, {
-    sname <- input$newSample
-    if (is.null(sname)) return(NULL)
-    tab <- read.table(paste("fqProcessed/",sname,"/tufcoverage.txt",sep=""), header=F)
-    colnames(tab) <- c("sp", "position", "depth")
-    tab
-  })
-  covplottuf <- reactive({
-    tab <- qtuf()
-    ggplot(qtuf()) + 
-      geom_bar(aes(x=position,y=depth), stat="identity", fill="skyblue") + 
-      ggtitle("tuf coverage") + 
-      theme(plot.title=element_text(size=20,face="bold"))
-  })
-  output$covtuf <- renderPlot(covplottuf())
-  
+
+  observeEvent(input$start, {
+    for (t in targets) {
+      local({
+        target <- t
+        plotname <- paste(target, "qplot", sep="")
+        tab <- read.table(paste("fqProcessed/",input$newSample,"/",target,"coverage.txt", sep=""), header=F)
+        colnames(tab) <- c("sp", "position", "depth")
+        output[[plotname]] <- renderPlot(
+          ggplot(tab) + geom_bar(aes(x=position, y=depth), stat="identity", fill="skyblue") +
+            ggtitle(paste(target, "coverage")) + theme(plot.title=element_text(size=20, face="bold"))
+        )
+      })
+    }
+  }, priority=-1)
   # kraken code
   options(shiny.maxRequestSize=300*1024^2)
   # so that paths work

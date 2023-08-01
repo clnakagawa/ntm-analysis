@@ -13,15 +13,19 @@ def main(file=None):
     getGenes.main(output="refFiles",type="cds")
     getGenes.main(output="refFiles",type="rna")
     getGenes.main(output="refFiles")
-
+    
+    # must be changed for future targets
     targets = [('chaperonin GroEL', 'groL'),
                ('ATP synthase subunit beta', 'atpD'),
                ('RNA polymerase subunit beta', 'rpoB'),
                ('elongation factor Tu', 'tuf')]
     extractGene.main(targets, dir="refFiles")
+
+    # must be changed for future targets
     rnaTargets = [('16S','16S'),('23S','23S')]
     extractGene.main(rnaTargets, dir="refFiles", type='rna')
 
+    # must be changed for future targets
     targets = ['groL', 'atpD', 'rpoB', 'tuf', '16S', '23S']
     seqClean.main(targets)
 
