@@ -20,9 +20,9 @@ map_to_consensus()
    samtools depth fqProcessed/$SAMPLE_DIR/$1align.bam > fqProcessed/$SAMPLE_DIR/$1coverage.txt
 }
 
-for target in "16S" "23S" "atpD" "groL" "rpoB" "tuf"
+while IFS="," read -r rec1
 do 
-   map_to_consensus $target
-done
+   map_to_consensus $rec1
+done < <(cut -d "," -f2 targets.csv | tail -n +2)
 
 cat fqProcessed/$SAMPLE_DIR/*consensus.fasta > fqProcessed/$SAMPLE_DIR/allSeqs.txt

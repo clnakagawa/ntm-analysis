@@ -15,18 +15,16 @@ def main(file=None):
     getGenes.main(output="refFiles")
     
     # must be changed for future targets
-    targets = [('chaperonin GroEL', 'groL'),
-               ('ATP synthase subunit beta', 'atpD'),
-               ('RNA polymerase subunit beta', 'rpoB'),
-               ('elongation factor Tu', 'tuf')]
+    tardf = pd.read_csv("targets.csv")
+    targets = [tuple(r) for r in tardf.loc[tardf['type']=='cds'][['full','short']].to_numpy()]
     extractGene.main(targets, dir="refFiles")
 
     # must be changed for future targets
-    rnaTargets = [('16S','16S'),('23S','23S')]
+    rnaTargets = [tuple(r) for r in tardf.loc[tardf['type']=='rna'][['full','short']].to_numpy()]
     extractGene.main(rnaTargets, dir="refFiles", type='rna')
 
     # must be changed for future targets
-    targets = ['groL', 'atpD', 'rpoB', 'tuf', '16S', '23S']
+    targets = tardf['short'].to_list()
     seqClean.main(targets)
 
 

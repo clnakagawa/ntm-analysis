@@ -17,9 +17,9 @@ server <- function(input, output, session){
     write(readLines(input$allSeqs$datapath, warn=F), paste("query/", input$newSample, "/sample.fastq", sep=""))
   
     # build index
-    system(paste("sh buildIndex.sh ", input$sp , " ", sub(".*_","",input$sp), sep = ""))
+    system(paste("bash buildIndex.sh ", input$sp , " ", sub(".*_","",input$sp), sep = ""))
     # process fastq
-    system(paste("sh processFQ.sh", 
+    system(paste("bash processFQ.sh", 
                  paste("query/", input$newSample, "/sample.fastq", sep=""),
                  input$sp,
                  sub(".*_","",input$sp),
@@ -91,7 +91,7 @@ server <- function(input, output, session){
   
   # coverage plots for targets
   # change this list to set new targets
-  targets = list("16S", "23S", "atpD", "groL", "rpoB", "tuf")
+  targets = read.csv("targets.csv")$short
   
   # for viewing past runs
   output$plots <- renderUI({

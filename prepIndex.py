@@ -59,12 +59,13 @@ def main():
     # pull target sequences from files
     if not os.path.exists("mmRef"):
         os.mkdir("mmRef")
-    genetargets = [('chaperonin GroEL', 'groL'),
-                   ('ATP synthase subunit beta', 'atpD'),
-                   ('RNA polymerase subunit beta', 'rpoB'),
-                   ('elongation factor Tu', 'tuf')]
-    rnatargets = [('16S', '16S'), ('23S', '23S')]
-    targets = ['16S', '23S', 'atpD', 'groL', 'rpoB', 'tuf']
+    tardf = pd.read_csv("targets.csv")
+    genetargets = [tuple(r) for r in tardf.loc[tardf['type']=='cds'][['full','short']].to_numpy()]
+    print(genetargets)
+    rnatargets = [tuple(r) for r in tardf.loc[tardf['type']=='rna'][['full','short']].to_numpy()]
+    print(rnatargets)
+    targets = tardf['short'].to_list()
+    print(targets)
     data = pd.read_csv("summaryData.csv")
     for name in data['sp']:
         if not os.path.exists(f"mmRef/{name}"):

@@ -23,7 +23,8 @@ def getCov(seq1, seq2):
 
 def test(sample, source="refFiles"):
     # must change if targets are changed
-    targets = ['16S', '23S', 'atpD', 'groL', 'rpoB','tuf']
+    targets = pd.read_csv('targets.csv')['short'].to_list()
+    print(targets)
     start = datetime.datetime.now()
     if os.path.exists(f"query/{sample}/totalSNP{source}.csv"):
         total = pd.read_csv(f"query/{sample}/totalSNP{source}.csv", index_col=0)
