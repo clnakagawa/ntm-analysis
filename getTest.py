@@ -6,31 +6,6 @@ import cleanFTP, getGenes, random, seqClean, os, snpDists, datetime, re
 import extractGene
 from functools import reduce
 
-def makeGraphs(sample, source="refFiles"):
-    # targets = ['16S','23S','atpD','groL','rpoB','tuf']
-    targets = ['groL', '16S', '23S', 'rpoB']
-    res = pd.read_csv(f"query/{sample}/topHits{source}.csv", index_col=0)
-    sps = res.index.values
-    cov = []
-    for sp in sps:
-        s1 = ""
-        s2 = ""
-        for target in targets:
-            with open(f"query/{sample}/{target}/align{target}_{sp}",'r') as f:
-                seqs = [''.join(seq.split("\n")[1:]) for seq in f.read().split("\n>")]
-                s1 += seqs[0]
-                s2 += seqs[1]
-        cov.append(getCov(s1, s2))
-
-    if not os.path.exists(f"query/{sample}/plots"):
-        os.mkdir(f"query/{sample}/plots")
-
-    fig = plt.figure()
-    plt.bar(sps, cov)
-    plt.bar(sps, res['snp'])
-    plt.savefig(f"query/{sample}/plots/cov.png")
-    plt.close()
-
 def gapDiff(seq1, seq2):
     ct = 0
     for i in range(len(seq1)):
@@ -83,14 +58,16 @@ def test(sample, source="refFiles"):
             gaps = [ctgaps(aln[0]) + ctgaps(aln[1]) for aln in alns]
             cov = [getCov(aln[0],aln[1]) for aln in alns]
             gd = [gapDiff(aln[0],aln[1]) for aln in alns]
-            df = pd.DataFrame({'sp': sps, 'snp': snps, 'gap': gaps, 'cov': cov, 'gdiff': gd}).sort_values('snp')
+            df = pd.DataFrame({'sp': sps, 'snp': snps, 'gap': gaps, 'cov': cov, 'gdiff': gd})
+            df['diff'] = df['snp'] + df['gdiff']
+            df = df.sort_values("diff")
             df = df.set_index(['sp'])
             df.to_csv(f"query/{sample}/{target}SNP{source}.csv")
             dfs.append(df)
         total = reduce(lambda x, y: x.add(y), dfs)
         total['cov'] = total['cov'] / 6
-        total = total.sort_values('gdiff')
-        total = total.sort_values('snp')
+        total = total.sort_values('gap')
+        total = total.sort_values('diff')
         total.to_csv(f"query/{sample}/totalSNP{source}.csv")
     print(total.head())
     print(sample,

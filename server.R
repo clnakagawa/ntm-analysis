@@ -3,9 +3,10 @@ library(ggplot2)
 library(reticulate)
 library(dplyr)
 library(DT)
+library(reshape2)
 
 # snp distance cutoff for displaying results
-cutoff <- 5
+
 
 use_python("myenv/bin/python")
 source_python("cleanFTP.py")
@@ -38,7 +39,8 @@ server <- function(input, output, session){
     sname <- input$newSample
     if (is.null(sname)) return(NULL)
     qres <- read.csv(paste("query/",sname,"/totalSNPrefFiles.csv",sep=""))
-    qres <- qres[qres$snp < cutoff,]
+    qres <- qres[qres$diff < input$cutoff,]
+    qres <- qres[,c(1,6,2,5,3)]
     qres
   })
   output$resTable <- DT::renderDataTable(datatable(contents(), 
@@ -51,7 +53,9 @@ server <- function(input, output, session){
     sname <- input$oldSample
     if (is.null(sname)) return(NULL)
     qres <- read.csv(paste("query/",sname,"/totalSNPrefFiles.csv",sep=""))
-    qres <- qres[qres$snp < cutoff,]
+    print(head(qres))
+    qres <- qres[qres$diff < input$qcutoff,]
+    qres <- qres[,c(1,6,2,5,3)]
     qres
   })
   output$table <- DT::renderDataTable(datatable(qcontents(), 
@@ -61,47 +65,30 @@ server <- function(input, output, session){
   )  
   snpplot <- reactive({
     resTab <- contents()
-    ggplot(resTab, aes(reorder(sp, snp), snp)) + xlab("species") + 
-      geom_bar(stat="identity",  fill='red', width=0.5) +
+    df = data.frame(species=resTab$sp, total=resTab$diff, snp=resTab$snp, gap=resTab$gdiff)
+    df$species = factor(df$species, level=df$species)
+    df = melt(df, id.vars=c("species"))
+    ggplot(df, aes(species, value, fill=variable)) + geom_bar(stat='Identity',position=position_dodge())+
       ggtitle("SNP Plot") +
       theme(text = element_text(size=20), 
             plot.title = element_text(face="bold"),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5, size=rel(0.8)))
   })
   output$snpplot <- renderPlot(snpplot())
-  
-  covplot <- reactive({
-    resTab <- contents()
-    ggplot(resTab, aes(reorder(sp, snp), cov)) + xlab("species") + 
-      geom_bar(stat="identity", fill='blue', width=0.5) +
-      ggtitle("Alignment Coverage Plot") +
-      theme(text = element_text(size=20), 
-            plot.title = element_text(face="bold"), 
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5, size=rel(0.8)))
-  })
-  output$covplot <- renderPlot(covplot())
-  
+    
   qsnpplot <- reactive({
-    resTab <- qcontents()
-    ggplot(resTab, aes(reorder(sp, snp), snp)) + xlab("species") + 
-      geom_bar(stat="identity",  fill='red', width=0.5) +
-      ggtitle("SNP Plot") + 
-      theme(text = element_text(size=20), 
+    resTab <- qcontents() 
+    df = data.frame(species=resTab$sp, total=resTab$diff, snp=resTab$snp, gap=resTab$gdiff)
+    df$species = factor(df$species, level=df$species)
+    df = melt(df, id.vars=c("species"))
+    ggplot(df, aes(species, value, fill=variable)) + geom_bar(stat='Identity',position=position_dodge())+
+      ggtitle("SNP Plot") +   
+      theme(text = element_text(size=20),
             plot.title = element_text(face="bold"),
             axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5, size=rel(0.8)))
   })
   output$qsnpplot <- renderPlot(qsnpplot())
   
-  qcovplot <- reactive({
-    resTab <- qcontents()
-    ggplot(resTab, aes(reorder(sp, snp), cov)) + xlab("species") + 
-      geom_bar(stat="identity", fill='blue', width=0.5) +
-      ggtitle("Alignment Coverage Plot") +
-      theme(text = element_text(size=20), 
-            plot.title = element_text(face="bold"),
-            axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=0.5, size=rel(0.8)))
-  })
-  output$qcovplot <- renderPlot(qcovplot())
   # coverage plots for targets
   # change this list to set new targets
   targets = list("16S", "23S", "atpD", "groL", "rpoB", "tuf")

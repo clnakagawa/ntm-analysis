@@ -1,0 +1,780 @@
+chromosomal replication initiator protein DnaA
+hypothetical protein
+DNA polymerase III subunit beta
+DNA replication/repair protein RecF
+DNA topoisomerase (ATP-hydrolyzing) subunit B
+class I SAM-dependent methyltransferase
+DUF3566 domain-containing protein
+MFS transporter
+peptidylprolyl isomerase
+rhomboid family intramembrane serine protease
+PH domain-containing protein
+cell division protein CrgA
+DUF881 domain-containing protein
+aminodeoxychorismate/anthranilate synthase component II
+Stk1 family PASTA domain-containing Ser/Thr kinase
+FtsW/RodA/SpoVE family cell cycle protein
+protein phosphatase 2C domain-containing protein
+FHA domain-containing protein
+TetR/AcrR family transcriptional regulator
+WXG100 family type VII secretion target
+diiron oxygenase
+SDR family oxidoreductase
+ATP-binding protein
+acyl-CoA dehydrogenase family protein
+GntR family transcriptional regulator
+NAD(P)/FAD-dependent oxidoreductase
+alpha/beta hydrolase
+MarR family transcriptional regulator
+SDR family NAD(P)-dependent oxidoreductase
+glutamate synthase large subunit
+type I methionyl aminopeptidase
+helix-turn-helix transcriptional regulator
+cytochrome P450
+ribonuclease E activity regulator RraA
+DUF6474 family protein
+SAM-dependent methyltransferase
+LCP family protein
+prephenate dehydratase
+histidine phosphatase family protein
+oxygenase MpaB family protein
+ESX secretion-associated protein EspG
+metallopeptidase family protein
+septum formation family protein
+serine--tRNA ligase
+MBL fold metallo-hydrolase
+AAA family ATPase
+nitronate monooxygenase
+UDP-galactopyranose mutase
+glycosyltransferase
+phosphatase PAP2 family protein
+decaprenyl-phosphate phosphoribosyltransferase
+cutinase family protein
+long-chain-fatty-acid--AMP ligase FadD32
+polyketide synthase Pks13
+acyl-CoA carboxylase subunit beta
+arabinosyltransferase domain-containing protein
+decaprenylphospho-beta-D-erythro-pentofuranosid-2-ulose 2-reductase
+FAD-binding oxidoreductase
+GtrA family protein
+carboxymuconolactone decarboxylase family protein
+ABC transporter permease
+cysteine desulfurase-like protein
+cupin domain-containing protein
+histidinol-phosphate transaminase
+GNAT family N-acetyltransferase
+ABC transporter substrate-binding protein
+putative glycolipid-binding domain-containing protein
+prephenate dehydrogenase
+tRNA adenosine deaminase-associated protein
+ATP-dependent DNA ligase
+SRPBCC family protein
+AMP-binding protein
+helix-turn-helix domain-containing protein
+amidohydrolase family protein
+DNA polymerase III subunits gamma/tau
+phosphopyruvate hydratase
+enoyl-CoA hydratase/isomerase family protein
+Rv3717 family N-acetylmuramoyl-L-alanine amidase
+YbaB/EbfC family nucleoid-associated protein
+recombination mediator RecR
+30S ribosomal protein S18
+50S ribosomal protein L33
+50S ribosomal protein L28
+2-isopropylmalate synthase
+FAD-dependent oxidoreductase
+nitroreductase family protein
+aspartate kinase
+aspartate-semialdehyde dehydrogenase
+DUF4185 domain-containing protein
+alpha/beta fold hydrolase
+sensor domain-containing protein
+LLM class F420-dependent oxidoreductase
+nuclear transport factor 2 family protein
+L-histidine N(alpha)-methyltransferase
+RDD family protein
+DUF58 domain-containing protein
+HNH endonuclease
+metallophosphoesterase
+transglycosylase/D,D-transpeptidase PonA2
+WhiB family transcriptional regulator
+endonuclease III
+acid resistance serine protease MarP
+phage holin family protein
+HAD-IB family hydrolase
+carbonic anhydrase
+MmpS family transport accessory protein
+carbon-nitrogen hydrolase family protein
+DEAD/DEAH box helicase
+cold-shock protein
+type I DNA topoisomerase
+adenylate/guanylate cyclase domain-containing protein
+DNA polymerase III subunit delta'
+GAP family protein
+wax ester/triacylglycerol synthase family O-acyltransferase
+inorganic diphosphatase
+D-alanyl-D-alanine carboxypeptidase/D-alanyl-D-alanine-endopeptidase
+zinc-dependent metalloprotease
+tRNA lysidine(34) synthetase TilS
+hypoxanthine phosphoribosyltransferase
+zinc-binding dehydrogenase
+LLM class flavin-dependent oxidoreductase
+ATP-dependent zinc metalloprotease FtsH
+GTP cyclohydrolase I FolE
+dihydropteroate synthase
+dihydroneopterin aldolase
+2-amino-4-hydroxy-6-hydroxymethyldihydropteridine diphosphokinase
+pantoate--beta-alanine ligase
+type III pantothenate kinase
+lysine--tRNA ligase
+serine hydrolase
+PaaI family thioesterase
+2-C-methyl-D-erythritol 4-phosphate cytidylyltransferase
+2-C-methyl-D-erythritol 2,4-cyclodiphosphate synthase
+cysteine--tRNA ligase
+23S rRNA (guanosine(2251)-2'-O)-methyltransferase RlmB
+trehalose-phosphatase
+acyl-CoA dehydrogenase
+VOC family protein
+TetR family transcriptional regulator
+acetyl-CoA C-acetyltransferase
+nitroreductase family deazaflavin-dependent oxidoreductase
+phosphatidylserine decarboxylase
+chaperonin GroEL
+phosphoribosylamine--glycine ligase
+pyridoxal phosphate-dependent aminotransferase
+adenylosuccinate lyase
+phosphoribosylaminoimidazolesuccinocarboxamide synthase
+phosphoribosylformylglycinamidine synthase subunit PurS
+phosphoribosylformylglycinamidine synthase subunit PurQ
+M18 family aminopeptidase
+DoxX family protein
+phosphoribosylformylglycinamidine synthase subunit PurL
+sterol carrier family protein
+amidophosphoribosyltransferase
+NAD-dependent epimerase/dehydratase family protein
+amidase
+phosphoribosylformylglycinamidine cyclo-ligase
+DUF1416 domain-containing protein
+mannan chain length control protein LmeA
+mycothiol synthase
+phosphate ABC transporter permease subunit PstC
+phosphate ABC transporter permease PstA
+phosphate signaling complex protein PhoU
+tRNA dihydrouridine synthase DusB
+acyl-ACP desaturase
+LpqN/LpqT family lipoprotein
+NAD-glutamate dehydrogenase
+aldehyde dehydrogenase family protein
+CoA transferase
+MMPL family transporter
+molybdenum cofactor biosynthesis protein MoaE
+transglycosylase family protein
+DUF3027 domain-containing protein
+DUF2530 domain-containing protein
+RNA methyltransferase
+DUF2537 domain-containing protein
+septation protein SepH
+dihydrolipoyl dehydrogenase
+thiolase family protein
+fumarylacetoacetate hydrolase family protein
+transcriptional regulator
+phosphoserine transaminase
+type I polyketide synthase
+citrate synthase
+enoyl-CoA hydratase
+DNA polymerase IV
+thioesterase family protein
+MCE family protein
+Ku protein
+pyridoxamine 5'-phosphate oxidase family protein
+cytochrome c oxidase subunit I
+glucose-6-phosphate isomerase
+chorismate mutase
+ADP-forming succinate--CoA ligase subunit beta
+succinate--CoA ligase subunit alpha
+DUF5336 domain-containing protein
+phosphoribosylglycinamide formyltransferase
+bifunctional phosphoribosylaminoimidazolecarboxamide formyltransferase/IMP cyclohydrolase
+DUF1707 domain-containing protein
+50S ribosomal protein L32
+trypsin-like peptidase domain-containing protein
+5-formyltetrahydrofolate cyclo-ligase
+PPOX class F420-dependent oxidoreductase
+DUF5642 family protein
+alpha-ketoglutarate-dependent dioxygenase AlkB
+16S rRNA (cytidine(1402)-2'-O)-methyltransferase
+aminodeoxychorismate synthase component I
+methionine--tRNA ligase
+16S rRNA (adenine(1518)-N(6)/adenine(1519)-N(6))-dimethyltransferase RsmA
+amino acid permease
+4-(cytidine 5'-diphospho)-2-C-methyl-D-erythritol kinase
+fatty acyl-AMP ligase
+aminoacyl-tRNA hydrolase
+50S ribosomal protein L25/general stress protein Ctc
+ribose-phosphate diphosphokinase
+bifunctional UDP-N-acetylglucosamine diphosphorylase/glucosamine-1-phosphate N-acetyltransferase GlmU
+diaminopimelate decarboxylase
+transcription-repair coupling factor
+septum formation initiator family protein
+DUF501 domain-containing protein
+CoA-acylating methylmalonate-semialdehyde dehydrogenase
+Bax inhibitor-1/YccA family protein
+cystathionine gamma-synthase
+transcription elongation factor GreA
+mycothiol conjugate amidase Mca
+isoprenyl transferase
+ferredoxin
+type I pantothenate kinase
+PhoH family protein
+class II fructose-bisphosphatase
+exodeoxyribonuclease VII small subunit
+exodeoxyribonuclease VII large subunit
+lipid droplet-associated protein
+4-hydroxy-3-methylbut-2-enyl diphosphate reductase
+mannosyltransferase
+4a-hydroxytetrahydrobiopterin dehydratase
+N-acetyl-1-D-myo-inositol-2-amino-2-deoxy-alpha-D-glucopyranoside deacetylase
+bifunctional FO biosynthesis protein CofGH
+succinyldiaminopimelate transaminase
+acyl-CoA synthetase
+2,3,4,5-tetrahydropyridine-2,6-dicarboxylate N-succinyltransferase
+succinyl-diaminopimelate desuccinylase
+TIGR00730 family Rossman fold protein
+glucosyl-3-phosphoglycerate synthase
+DivIVA domain-containing protein
+DUF3117 domain-containing protein
+glucose-1-phosphate adenylyltransferase
+RNA polymerase sigma factor SigE
+Sec-independent protein translocase protein TatB
+sn-glycerol-3-phosphate ABC transporter ATP-binding protein UgpC
+multifunctional oxoglutarate decarboxylase/oxoglutarate dehydrogenase thiamine pyrophosphate-binding subunit/dihydrolipoyllysine-residue succinyltransferase subunit
+LppP/LprE family lipoprotein
+DUF3558 domain-containing protein
+arginine--tRNA ligase
+homoserine dehydrogenase
+threonine synthase
+homoserine kinase
+transcription termination factor Rho
+50S ribosomal protein L31
+peptide chain release factor 1
+L-threonylcarbamoyladenylate synthase
+F0F1 ATP synthase subunit A
+F0F1 ATP synthase subunit C
+F0F1 ATP synthase subunit B
+F0F1 ATP synthase subunit B/delta
+F0F1 ATP synthase subunit alpha
+F0F1 ATP synthase subunit gamma
+F0F1 ATP synthase subunit beta
+F0F1 ATP synthase subunit epsilon
+cob(I)yrinic acid a,c-diamide adenosyltransferase
+UDP-N-acetylglucosamine 1-carboxyvinyltransferase
+endonuclease NucS
+methylmalonyl-CoA epimerase
+DUF3817 domain-containing protein
+ATP-dependent Clp protease adapter ClpS
+P1 family peptidase
+ribonuclease PH
+crotonase/enoyl-CoA hydratase family protein
+DUF1906 domain-containing protein
+holo-ACP synthase
+NUDIX domain-containing protein
+DUF3618 domain-containing protein
+CBS domain-containing protein
+aldo/keto reductase
+MaoC family dehydratase N-terminal domain-containing protein
+Ig-like domain-containing protein
+oligoribonuclease
+mycolate reductase
+PE-PPE domain-containing protein
+DUF732 domain-containing protein
+cytochrome c oxidase assembly protein
+single-stranded DNA-binding protein
+energy-dependent translational throttle protein EttA
+aminopeptidase N
+ribose-5-phosphate isomerase
+trigger factor
+ATP-dependent Clp protease ATP-binding subunit ClpX
+valine--tRNA ligase
+DUF4233 domain-containing protein
+nucleoside-diphosphate kinase
+50S ribosomal protein L21
+50S ribosomal protein L27
+GTPase ObgE
+glutamate 5-kinase
+VWA domain-containing protein
+nicotinate-nucleotide adenylyltransferase
+ribosome silencing factor
+DNA polymerase III subunit delta
+30S ribosomal protein S20
+type II toxin-antitoxin system PemK/MazF family toxin
+translation elongation factor 4
+heat-inducible transcriptional repressor HrcA
+molecular chaperone DnaJ
+16S rRNA (uracil(1498)-N(3))-methyltransferase
+rRNA maturation RNase YbeY
+GTPase Era
+DNA repair protein RecO
+metalloregulator ArsR/SmtB family transcription factor
+fatty acid desaturase
+glycine--tRNA ligase
+deoxyguanosinetriphosphate triphosphohydrolase
+DNA primase
+ATP-binding cassette domain-containing protein
+long-chain fatty acid--CoA ligase
+S-(hydroxymethyl)mycothiol dehydrogenase
+3-oxoacyl-ACP synthase KasA
+meromycolate extension acyl carrier protein AcpM
+pyruvate dehydrogenase (acetyl-transferring), homodimeric type
+peroxiredoxin
+SURF1 family protein
+Nif3-like dinuclear metal center hexameric protein
+bifunctional RNase H/acid phosphatase
+3-methyl-2-oxobutanoate hydroxymethyltransferase
+bifunctional [glutamine synthetase
+type I glutamate--ammonia ligase
+lipoyl synthase
+lipoyl(octanoyl) transferase LipB
+TIGR01777 family oxidoreductase
+2-oxoglutarate dehydrogenase, E2 component, dihydrolipoamide succinyltransferase
+leucyl aminopeptidase
+glycine cleavage system aminomethyltransferase GcvT
+branched-chain amino acid aminotransferase
+adenosylcobinamide-GDP ribazoletransferase
+nicotinate-nucleotide--dimethylbenzimidazole phosphoribosyltransferase
+bifunctional adenosylcobinamide kinase/adenosylcobinamide-phosphate guanylyltransferase
+DUF3043 domain-containing protein
+glycerate kinase
+asparagine synthase (glutamine-hydrolyzing)
+cytochrome c oxidase subunit II
+cytochrome c oxidase subunit 4
+DUF2561 family protein
+anthranilate phosphoribosyltransferase
+peptidoglycan hydrolase RipC
+polyadenylate-specific 3'-exoribonuclease AS
+3-deoxy-7-phosphoheptulonate synthase class II
+protein kinase
+alpha-(1->6)-mannopyranosyltransferase A
+polyprenyl synthetase family protein
+DUF3153 domain-containing protein
+DUF3040 domain-containing protein
+division/cell wall cluster transcriptional repressor MraZ
+16S rRNA (cytosine(1402)-N(4))-methyltransferase RsmH
+UDP-N-acetylmuramoyl-L-alanyl-D-glutamate--2,6-diaminopimelate ligase
+UDP-N-acetylmuramoyl-tripeptide--D-alanyl-D-alanine ligase
+phospho-N-acetylmuramoyl-pentapeptide-transferase
+putative lipid II flippase FtsW
+undecaprenyldiphospho-muramoylpentapeptide beta-N-acetylglucosaminyltransferase
+UDP-N-acetylmuramate--L-alanine ligase
+cell division protein FtsZ
+cell division protein SepF
+YggT family protein
+dihydroxy-acid dehydratase
+M20/M25/M40 family metallo-hydrolase
+YbhB/YbcL family Raf kinase inhibitor-like protein
+quinone-dependent dihydroorotate dehydrogenase
+DUF5703 family protein
+undecaprenyl-diphosphate phosphatase
+SCO1664 family protein
+cysteine--1-D-myo-inosityl 2-amino-2-deoxy-alpha-D-glucopyranoside ligase
+PAC2 family protein
+methionine synthase
+phosphoribosyl-ATP diphosphatase
+ATP phosphoribosyltransferase
+NADH-quinone oxidoreductase subunit G
+NADH-quinone oxidoreductase subunit NuoK
+proteasome ATPase
+ubiquitin-like protein Pup
+proteasome subunit beta
+proteasome subunit alpha
+Pup--protein ligase
+Sec-independent protein translocase subunit TatA
+twin-arginine translocase subunit TatC
+DUF4333 domain-containing protein
+apolipoprotein N-acyltransferase
+RNA polymerase-binding protein RbpA
+type VII secretion integral membrane protein EccD
+type VII secretion protein EccB
+methionyl-tRNA formyltransferase
+MerR family transcriptional regulator
+30S ribosomal protein S1
+dephospho-CoA kinase
+DUF5078 domain-containing protein
+excinuclease ABC subunit UvrB
+universal stress protein
+excinuclease ABC subunit UvrA
+translation initiation factor IF-3
+50S ribosomal protein L35
+50S ribosomal protein L20
+methylated-DNA--[protein
+phenylalanine--tRNA ligase subunit alpha
+phenylalanine--tRNA ligase subunit beta
+N-acetyl-gamma-glutamyl-phosphate reductase
+bifunctional glutamate N-acetyltransferase/amino-acid acetyltransferase ArgJ
+acetylglutamate kinase
+acetylornithine transaminase
+arginine repressor
+argininosuccinate lyase
+DNA-3-methyladenine glycosylase
+tyrosine--tRNA ligase
+NAD kinase
+DNA repair protein RecN
+putative cytokinetic ring protein SteA
+copper transporter
+CTP synthase
+site-specific tyrosine recombinase XerD
+segregation/condensation protein A
+SMC-Scp complex subunit ScpB
+pseudouridine synthase
+(d)CMP kinase
+ribosome biogenesis GTPase Der
+accessory Sec system translocase SecA2
+CDP-alcohol phosphatidyltransferase family protein
+glycine cleavage system protein GcvH
+aminomethyl-transferring glycine dehydrogenase
+malate synthase G
+GuaB1 family IMP dehydrogenase-related protein
+NADP-dependent phosphogluconate dehydrogenase
+BlaI/MecI/CopY family transcriptional regulator
+competence/damage-inducible protein A
+(2Fe-2S)-binding protein
+NAD(P)H-dependent oxidoreductase
+phosphoenolpyruvate carboxykinase (GTP)
+DNA polymerase I
+acyl-CoA thioesterase II
+pyruvate kinase
+prolipoprotein diacylglyceryl transferase
+tryptophan synthase subunit alpha
+tryptophan synthase subunit beta
+indole-3-glycerol phosphate synthase TrpC
+TIGR02234 family membrane protein
+anthranilate synthase component I
+phosphoribosyl-AMP cyclohydrolase
+imidazole glycerol phosphate synthase subunit HisF
+bifunctional 1-(5-phosphoribosyl)-5-((5-phosphoribosylamino)methylideneamino)imidazole-4-carboxamide isomerase/phosphoribosylanthranilate isomerase PriA
+imidazole glycerol phosphate synthase subunit HisH
+imidazoleglycerol-phosphate dehydratase HisB
+histidinol dehydrogenase
+carboxylating nicotinate-nucleotide diphosphorylase
+quinolinate synthase NadA
+DUF2567 domain-containing protein
+biotin synthase BioB
+dethiobiotin synthase
+adenosylmethionine--8-amino-7-oxononanoate transaminase
+acyltransferase family protein
+DNA polymerase III subunit alpha
+RluA family pseudouridine synthase
+signal peptidase II
+isoleucine--tRNA ligase
+methylmalonyl Co-A mutase-associated GTPase MeaB
+methylmalonyl-CoA mutase
+methylmalonyl-CoA mutase small subunit
+NfeD family protein
+ferrochelatase
+NADH-dependent enoyl-ACP reductase InhA
+thioredoxin
+NADH:flavin oxidoreductase
+SUF system NifU family Fe-S cluster assembly protein
+Fe-S cluster assembly ATPase SufC
+Fe-S cluster assembly protein SufD
+polyprenol phosphomannose-dependent alpha 1,6 mannosyltransferase MptB
+heme o synthase
+transketolase
+transaldolase
+glucose-6-phosphate dehydrogenase
+glucose-6-phosphate dehydrogenase assembly protein OpcA
+6-phosphogluconolactonase
+preprotein translocase subunit SecG
+triose-phosphate isomerase
+phosphoglycerate kinase
+type I glyceraldehyde-3-phosphate dehydrogenase
+DNA-binding protein WhiA
+RNase adapter RapZ
+excinuclease ABC subunit UvrC
+6,7-dimethyl-8-ribityllumazine synthase
+bifunctional 3,4-dihydroxy-2-butanone-4-phosphate synthase/GTP cyclohydrolase II
+riboflavin synthase
+LppX_LprAFG lipoprotein
+bifunctional diaminohydroxyphosphoribosylaminopyrimidine deaminase/5-amino-6-(5-phosphoribosylamino)uracil reductase RibD
+ribulose-phosphate 3-epimerase
+transcription antitermination factor NusB
+methionine adenosyltransferase
+bifunctional phosphopantothenoylcysteine decarboxylase/phosphopantothenate--cysteine ligase CoaBC
+DNA-directed RNA polymerase subunit omega
+guanylate kinase
+orotidine-5'-phosphate decarboxylase
+carbamoyl-phosphate synthase large subunit
+glutamine-hydrolyzing carbamoyl-phosphate synthase small subunit
+dihydroorotase
+aspartate carbamoyltransferase catalytic subunit
+elongation factor P
+type II 3-dehydroquinate dehydratase
+3-dehydroquinate synthase
+chorismate synthase
+shikimate dehydrogenase
+endolytic transglycosylase MltG
+Holliday junction resolvase RuvX
+alanine--tRNA ligase
+aspartate--tRNA ligase
+gamma-glutamylcyclotransferase
+histidine--tRNA ligase
+RelA/SpoT family protein
+adenine phosphoribosyltransferase
+protein translocase subunit SecF
+protein translocase subunit SecD
+preprotein translocase subunit YajC
+Holliday junction branch migration DNA helicase RuvB
+Holliday junction branch migration protein RuvA
+crossover junction endodeoxyribonuclease RuvC
+YebC/PmpR family DNA-binding transcriptional regulator
+pyridoxal 5'-phosphate synthase glutaminase subunit PdxT
+pyridoxal 5'-phosphate synthase lyase subunit PdxS
+phosphatidylinositol mannoside acyltransferase
+HIT domain-containing protein
+threonine--tRNA ligase
+pyrimidine reductase family protein
+protoporphyrinogen oxidase
+1-deoxy-D-xylulose-5-phosphate synthase
+DUF3710 domain-containing protein
+dUTP diphosphatase
+DUF3093 domain-containing protein
+envelope integrity protein Cei
+ROK family protein
+RNA polymerase sigma factor
+DUF3039 domain-containing protein
+DUF3099 domain-containing protein
+transcriptional regulator NrdR
+transcriptional repressor LexA
+GTPase HflX
+diaminopimelate epimerase
+tRNA (adenosine(37)-N6)-dimethylallyltransferase MiaA
+DUF349 domain-containing protein
+DUF3046 domain-containing protein
+CDP-diacylglycerol--glycerol-3-phosphate 3-phosphatidyltransferase
+amino-acid N-acetyltransferase
+4-hydroxy-tetrahydrodipicolinate synthase
+dihydrofolate reductase
+thymidylate synthase
+4-hydroxy-tetrahydrodipicolinate reductase
+polyribonucleotide nucleotidyltransferase
+30S ribosomal protein S15
+bifunctional riboflavin kinase/FAD synthetase
+tRNA pseudouridine(55) synthase TruB
+30S ribosome-binding factor RbfA
+translation initiation factor IF-2
+transcription termination factor NusA
+ferritin-like domain-containing protein
+proline--tRNA ligase
+penicillin-binding transpeptidase domain-containing protein
+flavodoxin-dependent (E)-4-hydroxy-3-methylbut-2-enyl-diphosphate synthase
+1-deoxy-D-xylulose-5-phosphate reductoisomerase
+DUF2631 domain-containing protein
+23S rRNA (adenine(2503)-C(2))-methyltransferase RlmN
+dienelactone hydrolase family protein
+phosphatidate cytidylyltransferase
+ribosome recycling factor
+UMP kinase
+translation elongation factor Ts
+30S ribosomal protein S2
+YraN family protein
+DUF2469 domain-containing protein
+ribonuclease HII
+signal peptidase I
+50S ribosomal protein L19
+tRNA (guanosine(37)-N1)-methyltransferase TrmD
+ribosome maturation factor RimM
+RNA-binding protein
+30S ribosomal protein S16
+signal recognition particle protein
+signal recognition particle-docking protein FtsY
+cytochrome c biogenesis CcdA family protein
+chromosome segregation protein SMC
+ribonuclease III
+pantetheine-phosphate adenylyltransferase
+16S rRNA (guanine(966)-N(2))-methyltransferase RsmD
+vitamin K epoxide reductase family protein
+ATP-dependent DNA helicase RecG
+uracil-DNA glycosylase
+thiamine-phosphate kinase
+NAD(P)H-dependent glycerol-3-phosphate dehydrogenase
+2-phospho-L-lactate guanylyltransferase
+RNA degradosome polyphosphate kinase
+HU family DNA-binding protein
+3-isopropylmalate dehydratase small subunit
+3-isopropylmalate dehydratase large subunit
+3-isopropylmalate dehydrogenase
+phosphoglycerate dehydrogenase
+ketol-acid reductoisomerase
+acetolactate synthase small subunit
+acetolactate synthase large subunit
+Asp-tRNA(Asn)/Glu-tRNA(Gln) amidotransferase subunit GatB
+Asp-tRNA(Asn)/Glu-tRNA(Gln) amidotransferase subunit GatA
+Asp-tRNA(Asn)/Glu-tRNA(Gln) amidotransferase subunit GatC
+NAD-dependent DNA ligase LigA
+tRNA 2-thiouridine(34) synthase MnmA
+electron transfer flavoprotein subunit beta/FixA family protein
+PQQ-binding-like beta-propeller repeat protein
+phosphoserine phosphatase SerB
+class 1b ribonucleoside-diphosphate reductase subunit beta
+class 1b ribonucleoside-diphosphate reductase subunit alpha
+class Ib ribonucleoside-diphosphate reductase assembly flavoprotein NrdI
+SsrA-binding protein SmpB
+permease-like cell division protein FtsX
+cell division ATP-binding protein FtsE
+peptide chain release factor 2
+UPF0182 family protein
+PDZ domain-containing protein
+MGMT family protein
+TIGR02569 family protein
+DUF3152 domain-containing protein
+ferritin-like fold-containing protein
+biotin/lipoyl-binding carrier protein
+3-phosphoshikimate 1-carboxyvinyltransferase
+ribosome small subunit-dependent GTPase A
+preprotein translocase subunit SecA
+ribosome-associated translation inhibitor RaiA
+MtrAB system accessory lipoprotein LpqB
+dTMP kinase
+adenosylhomocysteinase
+rubredoxin
+mannose-6-phosphate isomerase, class I
+phosphomannomutase/phosphoglucomutase
+2-phospho-L-lactate transferase
+coenzyme F420-0:L-glutamate ligase
+5-(carboxyamino)imidazole ribonucleotide mutase
+5-(carboxyamino)imidazole ribonucleotide synthase
+biotin--[acetyl-CoA-carboxylase
+NAD(P)H-quinone dehydrogenase
+purine-nucleoside phosphorylase
+phospho-sugar mutase
+uracil phosphoribosyltransferase
+cytidine deaminase
+inner membrane protein YhjD
+tryptophan--tRNA ligase
+exodeoxyribonuclease III
+NADP-dependent isocitrate dehydrogenase
+homoserine O-acetyltransferase
+bifunctional methylenetetrahydrofolate dehydrogenase/methenyltetrahydrofolate cyclohydrolase
+tRNA (cytidine(34)-2'-O)-methyltransferase
+glutamine-hydrolyzing GMP synthase
+GuaB3 family IMP dehydrogenase-related protein
+IMP dehydrogenase
+co-chaperone GroES
+tRNA (adenosine(37)-N6)-threonylcarbamoyltransferase complex transferase subunit TsaD
+tRNA (adenosine(37)-N6)-threonylcarbamoyltransferase complex ATPase subunit type 1 TsaE
+alanine racemase
+glutamine--fructose-6-phosphate transaminase (isomerizing)
+phosphoglucosamine mutase
+30S ribosomal protein S9
+50S ribosomal protein L13
+tRNA pseudouridine(38-40) synthase TruA
+50S ribosomal protein L17
+DNA-directed RNA polymerase subunit alpha
+30S ribosomal protein S4
+30S ribosomal protein S11
+30S ribosomal protein S13
+50S ribosomal protein L36
+translation initiation factor IF-1
+dTDP-glucose 4,6-dehydratase
+adenylate kinase
+preprotein translocase subunit SecY
+signal peptide peptidase SppA
+50S ribosomal protein L15
+50S ribosomal protein L30
+30S ribosomal protein S5
+50S ribosomal protein L18
+50S ribosomal protein L6
+30S ribosomal protein S8
+type Z 30S ribosomal protein S14
+50S ribosomal protein L5
+50S ribosomal protein L24
+50S ribosomal protein L14
+30S ribosomal protein S17
+50S ribosomal protein L29
+50S ribosomal protein L16
+30S ribosomal protein S3
+50S ribosomal protein L22
+30S ribosomal protein S19
+50S ribosomal protein L2
+50S ribosomal protein L23
+50S ribosomal protein L4
+50S ribosomal protein L3
+30S ribosomal protein S10
+mycofactocin radical SAM maturase
+elongation factor Tu
+elongation factor G
+30S ribosomal protein S7
+30S ribosomal protein S12
+DNA-directed RNA polymerase subunit beta'
+DNA-directed RNA polymerase subunit beta
+carotenoid oxygenase family protein
+50S ribosomal protein L7/L12
+50S ribosomal protein L10
+50S ribosomal protein L1
+50S ribosomal protein L11
+transcription termination/antitermination protein NusG
+preprotein translocase subunit SecE
+(3R)-hydroxyacyl-ACP dehydratase subunit HadB
+zinc metalloprotease HtpX
+demethylmenaquinone methyltransferase
+2-succinyl-5-enolpyruvyl-6-hydroxy-3-cyclohexene-1-carboxylic-acid synthase
+o-succinylbenzoate synthase
+1,4-dihydroxy-2-naphthoyl-CoA synthase
+1,4-dihydroxy-2-naphthoate polyprenyltransferase
+DUF4229 domain-containing protein
+c-type cytochrome biogenesis protein CcsB
+cytochrome c biogenesis protein ResB
+glutamate-1-semialdehyde 2,1-aminomutase
+porphobilinogen synthase
+hydroxymethylbilane synthase
+glutamyl-tRNA reductase
+glutaredoxin family protein
+AURKAIP1/COX24 domain-containing protein
+pyrroline-5-carboxylate reductase
+phosphoglyceromutase
+YbjN domain-containing protein
+D-inositol-3-phosphate glycosyltransferase
+UDP-N-acetylmuramate dehydrogenase
+deoxyribose-phosphate aldolase
+DUF2516 family protein
+3-hydroxybutyryl-CoA dehydrogenase
+isocitrate lyase
+glucose-1-phosphate thymidylyltransferase RfbA
+trehalose-6-phosphate synthase
+3-oxoacyl-ACP reductase
+D-aminoacyl-tRNA deacylase
+superoxide dismutase family protein
+LytR C-terminal domain-containing protein
+DUF3263 domain-containing protein
+peptide deformylase
+bifunctional hydroxymethylpyrimidine kinase/phosphomethylpyrimidine kinase
+thiazole synthase
+sulfur carrier protein ThiS
+glycine oxidase ThiO
+thiamine phosphate synthase
+glucose-6-phosphate dehydrogenase (coenzyme-F420)
+adenylosuccinate synthase
+ATP-dependent chaperone ClpB
+nucleotide exchange factor GrpE
+molecular chaperone DnaK
+dCTP deaminase
+long-chain-fatty-acid--CoA ligase FadD2
+succinate dehydrogenase/fumarate reductase iron-sulfur subunit
+tRNA (guanosine(46)-N7)-methyltransferase TrmB
+NYN domain-containing protein
+TIGR04338 family metallohydrolase
+DUF2786 domain-containing protein
+Re/Si-specific NAD(P)(+) transhydrogenase subunit alpha
+patatin-like phospholipase family protein
+replicative DNA helicase
+50S ribosomal protein L9
+30S ribosomal protein S6
+YqgE/AlgH family protein
+CCA tRNA nucleotidyltransferase
+thioredoxin-disulfide reductase
+ParB/RepB/Spo0J family partition protein
+16S rRNA (guanine(527)-N(7))-methyltransferase RsmG
+membrane protein insertase YidC
+membrane protein insertion efficiency factor YidD
+ribonuclease P protein component
+50S ribosomal protein L34

@@ -47,6 +47,7 @@ ui <- fluidPage(
                                 width = NULL,
                                 size = NULL
                               ),
+                              sliderInput("cutoff", "Difference Cutoff", min=5, max=50, value=10),
                               width=6
                             ),
                             mainPanel(
@@ -73,6 +74,7 @@ ui <- fluidPage(
                                 size = NULL
                               ),
                               actionButton("browse", "Search"),
+                              sliderInput("qcutoff", "Difference Cutoff", min=5, max=50, value=10),
                               width=6
                             ),
                             mainPanel(
